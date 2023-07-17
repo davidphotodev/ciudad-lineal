@@ -1,0 +1,27 @@
+<div class="row p-3">
+    <div class="col-12">
+        <div class="list-title p-3 my-3">
+            <h2 class="text-center">Lista de Publicadores</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table list-table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Detalle</th>
+                        <th scope="col">Territorios</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let publisher of publishers " >
+                        <th [routerLink]="['/publishers/detail/' + publisher.id]" scope="row"> {{ publisher.id }} </th>
+                        <td [routerLink]="['/publishers/detail/' + publisher.id]">{{ publisher.name }}</td>
+                        <td [routerLink]="['/publishers/detail/' + publisher.id]">{{ publisher.detail }}</td>
+                        <td [routerLink]="['/publishers/detail/' + publisher.id]">{{ publisher.territories }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
