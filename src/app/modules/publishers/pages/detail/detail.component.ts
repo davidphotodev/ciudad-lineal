@@ -7,4 +7,16 @@ import { Component } from '@angular/core';
 })
 export class DetailComponent {
 
+  public finishModalClass: string = 'd-none';
+
+  public maps: any[] = [
+    {
+      number: '169',
+    }
+  ];
+
+  hideModal( value: string ){
+    this.finishModalClass = value;
+  }
+
 }

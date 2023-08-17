@@ -16,7 +16,7 @@
                             <h5 class="text-center">Territorios asignados</h5>
                             <p class="text-center"><strong>169</strong></p>
 
-                            <button class="btn btn-dark mx-1">Terminar</button>
+                            <button (click)="hideModal( 'd-block' )" class="btn btn-dark mx-1">Terminar</button>
                         </div>
                     </div>
                     <hr>
@@ -40,12 +40,18 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6 text-center">
+        <div class="col-12 col-md-6">
             <div class="card card-simple-info border-none my-2 p-1">
                 <div class="card-body">
-                    <figure class="map">
-                        <img class="w-75" src="http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-169.png" alt="territorio 169">
-                    </figure>
+                    <h5 class="card-title">Territorios asignados</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">Mapas de los territorios</h6>
+                    <div class="working-maps text-center" *ngFor="let map of maps">
+                        <hr>
+                        <figure class="map">
+                            <img class="w-75" src="http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-{{ map.number }}.png" alt="territorio {{ map.number }}">
+                        </figure>
+                        <hr>
+                    </div>
                 </div>
             </div>
         </div>
@@ -59,4 +65,8 @@
 
         </div>
     </div>
+</div>
+
+<div class="finish-territory-modal {{ finishModalClass }}">
+    <app-finish-territory (childEvent)="hideModal($event)"></app-finish-territory>
 </div>
