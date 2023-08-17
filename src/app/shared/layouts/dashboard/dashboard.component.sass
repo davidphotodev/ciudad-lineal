@@ -31,6 +31,7 @@ $gray-light: #a2a2a2
 .sidebar
     background-color: $black
     width: 15%
+    z-index: 2
 
 .sidebar-items ul li
     color: $text
@@ -50,7 +51,23 @@ $gray-light: #a2a2a2
     max-width:400px
     margin:auto
 
-@media (max-width: 575.98px)
+@media (max-width: 991.98px) and (min-width: 768px)
+    .sidebar
+        width: 25%
+
+    .main-content
+        margin-left: 25%
+        width: 75%
+
+@media (max-width: 767.99px) and (min-width: 576px)
+    .sidebar
+        width: 30%
+
+    .main-content
+        margin-left: 30%
+        width: 70%
+
+@media (max-width: 575.99px)
     .sidebar-close
         width: 10%
         .sidebar-logo
@@ -61,3 +78,6 @@ $gray-light: #a2a2a2
     .main-content
         margin-left: 10%
         width: 90%
+
+    .sidebar-open
+        width: 45%
