@@ -6,10 +6,10 @@ import { MainComponent } from './pages/main/main.component';
 const routes: Routes = [
   {
     path: '',
-    
+    pathMatch: 'full',
     children: [
-      { path: 'main', component:MainComponent },
-      { path: '**', redirectTo: 'main' }
+      { path: '', component:MainComponent },
+      { path: '**', redirectTo: '/' }
     ]
   }
 ]

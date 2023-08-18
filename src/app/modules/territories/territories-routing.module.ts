@@ -7,10 +7,11 @@ import { DetailComponent } from './pages/detail/detail.component';
 const routes: Routes = [
   {
     path: '',
+    pathMatch: 'full',
     children: [
-      { path: 'list', component:ListComponent },
+      { path: '', component:ListComponent },
       { path: 'detail/:id', component:DetailComponent },
-      { path: '**', redirectTo: 'list' }
+      { path: '**', redirectTo: '/' }
     ]
   }
 ]

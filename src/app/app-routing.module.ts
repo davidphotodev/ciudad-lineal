@@ -8,7 +8,7 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
       {
-        path: '',
+        path: 'home',
         loadChildren: () => import('./modules/home/home.module').then( m => m.HomeModule )
       },
       {
@@ -31,6 +31,7 @@ const routes: Routes = [
   },
   {
     path: '**',
+    pathMatch: 'full',
     redirectTo: 'auth'
   }
 ];
