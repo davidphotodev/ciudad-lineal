@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { MainComponent } from './pages/main/main.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    
-    children: [
-      { path: 'main', component:MainComponent },
-      { path: '**', redirectTo: 'main' }
-    ]
-  }
+ { 
+  path: '',
+  children: [
+    {
+      path: 'login',
+      component: LoginComponent
+    },
+    {
+      path: '**',
+      redirectTo: 'login'
+    }
+  ]
+}
 ]
 
 @NgModule({
@@ -21,4 +26,4 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ]
 })
-export class HomeRoutingModule { }
+export class AuthRoutingModule { }

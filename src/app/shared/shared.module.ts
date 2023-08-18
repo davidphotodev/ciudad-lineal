@@ -5,13 +5,13 @@ import { ManageModule } from '../modules/manage/manage.module';
 
 
 
+
 @NgModule({
-  declarations: [
-  ],
+  declarations: [],
   imports: [
     CommonModule,
     ManageModule,
-    DashboardComponent
+    DashboardComponent,
   ],
   exports: [
     DashboardComponent
