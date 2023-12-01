@@ -1,6 +1,11 @@
 export interface User {
     id: number;
-    user: string;
+    firstname: string;
+    lastname: string;
     email: string;
+    phone: string;
+    whatsapp: string;
+    ter_asigned: boolean;
+    user: string;
     password: string;
 }
