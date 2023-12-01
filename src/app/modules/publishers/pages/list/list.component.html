@@ -23,5 +23,8 @@
                 </tbody>
             </table>
         </div>
+        <div class="my-3 text-center" *ngIf="publishers.length > 9">
+            <button class="btn btn-dark" (click)="viewMore()" >Ver más</button>
+        </div>
     </div>
 </div>

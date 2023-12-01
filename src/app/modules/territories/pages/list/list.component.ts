@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class ListComponent {
 
+  public displayCount: number = 5;
+
   public territories: any[] = [
     {
       number: 1,
@@ -31,7 +33,11 @@ export class ListComponent {
       img: 'http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-3.png',
       type: 3,
       detail: 'Comercial'
-    }
+    },
   ]
+
+  viewMore(){
+    this.displayCount = this.displayCount + 9;
+  }
 
 }

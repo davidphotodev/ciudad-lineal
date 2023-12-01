@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class ListComponent {
 
+  public displayCount = 9;
+
   public publishers: any[] = [
     {
       'id': 1,
@@ -27,5 +29,9 @@ export class ListComponent {
       'territories': '78'
     }
   ];
+
+  viewMore(){
+    this.displayCount = this.displayCount + 9;
+  }
 
 }
