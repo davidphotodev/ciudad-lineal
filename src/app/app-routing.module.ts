@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './shared/layouts/dashboard/dashboard.component';
+import { AuthGuard } from './core/guards/guards.service';
 
 const routes: Routes = [
   {
@@ -19,11 +20,12 @@ const routes: Routes = [
         path: 'territories',
         loadChildren: () => import('./modules/territories/territories.module').then( m => m.TerritoriesModule )
       },
-      /* {
+      {
         path: '**',
-        redirectTo: '/'
-      } */
-    ]
+        redirectTo: 'home'
+      }
+    ],
+    canMatch: [ AuthGuard ]
   },
   {
     path: 'auth',
