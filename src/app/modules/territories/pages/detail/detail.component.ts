@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class DetailComponent {
 
+  public finishModalClass: string = 'd-none';
+
+  hideModal( value: string ){
+    this.finishModalClass = value;
+  }
+
 }

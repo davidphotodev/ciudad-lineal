@@ -25,7 +25,7 @@
                         <p><strong>Publicador asignado: </strong>Sócrates Crespo</p>
                         <p><strong>Último período trabajado: </strong> 02-07-2023 - </p>
                         <p><strong>Detalles: </strong>Se deben hacer todos los portales</p>
-                        <button class="btn btn-dark">Terminar territorio</button>
+                        <button (click)="hideModal( 'd-block' )" class="btn btn-dark">Terminar territorio</button>
                         <hr>
                     </div>
 
@@ -49,4 +49,8 @@
 
         
     </div>
+</div>
+
+<div class="finish-territory-modal {{ finishModalClass }}">
+    <app-finish-territory (childEvent)="hideModal($event)"></app-finish-territory>
 </div>
