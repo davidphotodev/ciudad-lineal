@@ -7,7 +7,6 @@ import { DetailComponent } from './pages/detail/detail.component';
 const routes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     children: [
       { path: '', component:ListComponent },
       { path: 'detail/:id', component:DetailComponent },

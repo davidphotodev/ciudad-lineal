@@ -15,10 +15,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let publisher of publishers " >
-                        <th [routerLink]="['/publishers/detail/' + publisher.id]" scope="row"> {{ publisher.id }} </th>
-                        <td [routerLink]="['/publishers/detail/' + publisher.id]">{{ publisher.name }}</td>
-                        <td [routerLink]="['/publishers/detail/' + publisher.id]">{{ publisher.detail }}</td>
-                        <td [routerLink]="['/publishers/detail/' + publisher.id]">{{ publisher.territories }}</td>
+                        <th [routerLink]="['/admin/publishers/detail/' + publisher.id]" scope="row"> {{ publisher.id }} </th>
+                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.name }}</td>
+                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.detail }}</td>
+                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.territories }}</td>
                     </tr>
                 </tbody>
             </table>

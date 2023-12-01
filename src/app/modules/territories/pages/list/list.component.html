@@ -15,10 +15,10 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let territorie of territories">
-                        <th [routerLink]="['/territories/detail/' + territorie.number]" scope="row">{{ territorie.number }}</th>
-                        <td [routerLink]="['/territories/detail/' + territorie.number]" class="td-img"><img class="w-25" src="{{ territorie.img }}" alt="{{ 'Territorio ' + territorie.number }}"></td>
-                        <td [routerLink]="['/territories/detail/' + territorie.number]">{{ territorie.detail }}</td>
-                        <td [routerLink]="['/territories/detail/' + territorie.number]">{{ territorie.publisher }}</td>
+                        <th [routerLink]="['/admin/territories/detail/' + territorie.number]" scope="row">{{ territorie.number }}</th>
+                        <td [routerLink]="['/admin/territories/detail/' + territorie.number]" class="td-img"><img class="w-25" src="{{ territorie.img }}" alt="{{ 'Territorio ' + territorie.number }}"></td>
+                        <td [routerLink]="['/admin/territories/detail/' + territorie.number]">{{ territorie.detail }}</td>
+                        <td [routerLink]="['/admin/territories/detail/' + territorie.number]">{{ territorie.publisher }}</td>
                     </tr>
                 </tbody>
             </table>
