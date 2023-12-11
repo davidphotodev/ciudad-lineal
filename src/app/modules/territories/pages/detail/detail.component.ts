@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class DetailComponent {
 
   public finishModalClass: string = 'd-none';
+  public whatsappNumber: string = '604216037';
 
   hideModal( value: string ){
     this.finishModalClass = value;
