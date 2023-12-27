@@ -1,40 +1,38 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TerritoriesService } from '../../services/territories.service';
+import { Territory } from '../../models/territories.interface';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.sass']
 })
-export class ListComponent {
+export class ListComponent implements OnInit {
 
   public displayCount: number = 5;
-
-  public territories: any[] = [
+  public territories: Territory[] = [
     {
       number: 1,
-      publisher: 'David Adan',
-      state: 'Asignado',
-      img: 'http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-1.png',
-      type: 1,
-      detail: 'Difícil acceso'
-    },
-    {
-      number: 2,
-      publisher: 'Sócrates Crespo',
-      state: 'Asignado',
-      img: 'http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-2.png',
-      type: 2,
-      detail: 'Residencial'
-    },
-    {
-      number: 3,
-      publisher: 'Joan Mendez',
-      state: 'Asignado',
-      img: 'http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-3.png',
-      type: 3,
-      detail: 'Comercial'
-    },
+      description: '',
+      history: [],
+      type: '',
+      map: '',
+      publisher: '',
+      state: '',
+      last_date: ''
+    }
   ]
+
+  constructor( private territoriesService: TerritoriesService ){}
+
+  ngOnInit(): void {
+    this.territoriesService.getTerritories()
+      .subscribe(
+        territories => {
+          console.log(territories);
+          this.territories = territories;
+        })
+  }
 
   viewMore(){
     this.displayCount = this.displayCount + 9;
