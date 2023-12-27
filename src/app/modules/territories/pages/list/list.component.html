@@ -40,5 +40,8 @@
         <div class="my-3 text-center" *ngIf="territories.length > 9">
             <button class="btn btn-dark" (click)="viewMore()" >Ver más</button>
         </div>
+        <div class="my-3 text-center">
+            <button class="btn btn-dark" [routerLink]="['/admin/territories/add']">Agregar Territorio</button>
+        </div>
     </div>
 </div>

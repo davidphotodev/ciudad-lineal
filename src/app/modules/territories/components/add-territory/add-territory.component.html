@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="my-3 text-center">Agregar territorio</h1>
+        </div>
+        <div class="col-12">
+            <form [formGroup]="addForm" (ngSubmit)="onSave()" class="form-control w-50 m-auto p-3">
+                <div class="py-2">
+                    <label for="territoryNumber">Número</label>
+                    <input type="number"
+                           class="form-control w-25" 
+                           name="territoryNumber"
+                           formControlName="territoryNumber"
+                           placeholder="0">
+                           <small class="text-danger" *ngIf="addForm.get('territoryNumber')?.touched && addForm.get('territoryNumber')?.invalid">Debe ser un número mayor a 0</small>
+                </div>
+                <div class="py-2">
+                    <label for="territoryType">Tipo de Territorio</label>
+                    <select class="form-control my-2"
+                            name="territoryType"
+                            formControlName="territoryType">
+                        <option value="residencial">Residencial</option>
+                        <option value="dificil">Difícil acceso</option>
+                        <option value="negocio">Negocio</option>
+                    </select>
+                    <small class="text-danger" *ngIf="addForm.get('territoryType')?.touched && addForm.get('territoryType')?.invalid">Selecciona el tipo de territorio</small>
+                </div>
+                <div class="py-2">
+                    <label for="territoryAssigned">Publicador asignado</label>
+                    <select class="form-control my-2"
+                            name="territoryAssigned"
+                            formControlName="territoryAssigned">
+                        <option value="residencial">Sin asignar</option>
+                        <option value="dificil">Sócrates Crespo</option>
+                        <option value="negocio">David Adan</option>
+                    </select>
+                    <small class="text-danger" *ngIf="addForm.get('territoryAssigned')?.touched && addForm.get('territoryAssigned')?.invalid">Selecciona el publicador</small>
+                </div>
+                <div class="py-2">
+                    <label for="territoryMap">Mapa</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="territoryMap" 
+                           formControlName="territoryMap"
+                           placeholder="Imagen del territorio">
+                           <small class="text-danger" *ngIf="addForm.get('territoryMap')?.touched && addForm.get('territoryMap')?.invalid">Debes agregar el link de la imagen</small>
+                </div>
+                <div class="py-2">
+                    <label for="description">Descripción (opcional)</label>
+                    <textarea class="form-control my-2" 
+                              name="description"
+                              formControlName="description" 
+                              placeholder="Comentario sobre el territorio"></textarea>
+                </div>
+                <div class="py-2 text-center">
+                    <button type="submit" 
+                            class="btn btn-dark">Agregar</button>
+                </div>
+                <div class="w-100 text-center">
+                    <small *ngIf="added === true" class="text-success">¡Territorio agregado!</small>
+                    <small *ngIf="error === true" class="text-danger">No se pudo agregar el territorio</small>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
