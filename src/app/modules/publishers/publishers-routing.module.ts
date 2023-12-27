@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { ListComponent } from './pages/list/list.component';
 import { DetailComponent } from './pages/detail/detail.component';
+import { AddPublisherComponent } from './components/add-publisher/add-publisher.component';
+
 
 const routes: Routes = [
   {
@@ -10,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: '', component: ListComponent },
       { path: 'detail/:id', component: DetailComponent },
+      { path: 'add', component:AddPublisherComponent },
       { path: '**', redirectTo: '/' }
     ]
   }
