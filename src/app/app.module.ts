@@ -10,6 +10,9 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 import { AuthModule } from './core/authentication/auth.module';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { enviroment } from 'src/enviroments/enviroment';
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import { AuthModule } from './core/authentication/auth.module';
     NgbModule,
     SharedModule,
     AuthModule,
-    HttpClientModule
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp (enviroment.firebase) ),
+    provideFirestore( () => getFirestore() )
   ],
   providers: [],
   bootstrap: [AppComponent]
