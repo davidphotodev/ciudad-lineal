@@ -7,17 +7,17 @@
             <table class="table list-table">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">Id</th>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Detalle</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Tipo</th>
                         <th scope="col">Territorios</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let publisher of publishers " >
-                        <th [routerLink]="['/admin/publishers/detail/' + publisher.id]" scope="row"> {{ publisher.id }} </th>
-                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.name }}</td>
-                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.detail }}</td>
+                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]" scope="row"> {{ publisher.firstname }} </td>
+                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.lastname }}</td>
+                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.publisherType }}</td>
                         <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.territories }}</td>
                     </tr>
                 </tbody>
