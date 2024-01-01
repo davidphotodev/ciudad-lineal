@@ -1,4 +1,5 @@
 export interface Publisher {
+    id?: string,
     firstname: string,
     lastname: string,
     publisherType: string,
