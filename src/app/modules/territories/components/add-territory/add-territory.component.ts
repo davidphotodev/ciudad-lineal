@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TerritoriesService } from '../../services/territories.service';
 import { Territory } from '../../models/territories.interface';
+import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
+import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
+import { Subject, Subscription, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-add-territory',
@@ -10,7 +13,9 @@ import { Territory } from '../../models/territories.interface';
   providers: [ 
   ]
 })
-export class AddTerritoryComponent {
+export class AddTerritoryComponent implements OnInit, OnDestroy {
+
+  private addSuscription: Subscription = new Subscription();
 
   public addForm: FormGroup = this.fb.group({
     territoryNumber: [0, [ Validators.required, Validators.min(1) ]],
@@ -22,9 +27,27 @@ export class AddTerritoryComponent {
 
   public added: boolean = false;
   public error: boolean = false;
+  public publishers: Publisher[] = [];
+  public destroyObs$: Subject<void> = new Subject();
 
   constructor( private fb: FormBuilder,
-               private TerritoriesService: TerritoriesService ){}
+               private TerritoriesService: TerritoriesService,
+               private publishersService: PublishersService ){}
+
+  ngOnInit(): void {
+    this.publishersService.getPublisher()
+      .pipe( takeUntil( this.destroyObs$ ) )
+      .subscribe(
+        publishers => {
+          this.publishers = publishers;
+        }
+      )
+  }
+
+  ngOnDestroy(): void {
+    this.destroyObs$.next();
+    this.destroyObs$.complete();
+  }
 
   async onSave(){
     if( this.addForm.invalid ){

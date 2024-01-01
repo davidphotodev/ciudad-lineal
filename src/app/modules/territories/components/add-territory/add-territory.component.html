@@ -30,9 +30,8 @@
                     <select class="form-control my-2"
                             name="territoryAssigned"
                             formControlName="territoryAssigned">
-                        <option value="residencial">Sin asignar</option>
-                        <option value="1">Sócrates Crespo</option>
-                        <option value="2">David Adan</option>
+                        <option value="1">Sin asignar</option>
+                        <option *ngFor="let publisher of publishers" [value]="publisher.id">{{ publisher.firstname + ' ' + publisher.lastname }}</option>
                     </select>
                     <small class="text-danger" *ngIf="addForm.get('territoryAssigned')?.touched && addForm.get('territoryAssigned')?.invalid">Selecciona el publicador</small>
                 </div>
