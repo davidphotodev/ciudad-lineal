@@ -63,6 +63,15 @@
                            <small class="text-danger" *ngIf="addForm.get('whatsapp')?.touched && addForm.get('whatsapp')?.invalid">Debes agregar el whatsapp</small>
                 </div>
                 <div class="py-2">
+                    <label for="address">Dirección</label>
+                    <input type="text" 
+                           class="form-control" 
+                           name="address" 
+                           formControlName="address"
+                           placeholder="Dirección completa">
+                           <small class="text-danger" *ngIf="addForm.get('address')?.touched && addForm.get('address')?.invalid">Debes agregar una dirección</small>
+                </div>
+                <div class="py-2">
                     <label for="description">Descripción (opcional)</label>
                     <textarea class="form-control my-2" 
                               name="description"

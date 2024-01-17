@@ -17,6 +17,7 @@ export class AddPublisherComponent {
     email: ['', [ Validators.required ]],
     phone: ['', [ Validators.required ]],
     whatsapp: ['', [ Validators.required ]],
+    address: ['', [ Validators.required ]],
     description: ['']
   });
 
@@ -41,6 +42,7 @@ export class AddPublisherComponent {
       description :  this.addForm.value.description,
       phone : this.addForm.value.phone,
       whatsapp : this.addForm.value.whatsapp,
+      address: this.addForm.value.address,
       territories: []
     };
 

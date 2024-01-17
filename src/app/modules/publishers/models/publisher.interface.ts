@@ -7,6 +7,7 @@ export interface Publisher {
     phone: string,
     whatsapp: string,
     description: string,
+    address: string,
     territories: Territory[],
     history: History[]
 }
