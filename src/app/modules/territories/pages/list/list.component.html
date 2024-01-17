@@ -32,9 +32,9 @@
                     <tr *ngFor="let territory of territories; index as i">
                         <th [routerLink]="['/admin/territories/detail/' + territory.number]" scope="row" *ngIf="i < displayCount">{{ territory.number }}</th>
                         <td [routerLink]="['/admin/territories/detail/' + territory.number]" class="td-img" *ngIf="i < displayCount"><img class="w-25" src="{{ territory.map }}" alt="{{ 'Territorio ' + territory.number }}"></td>
-                        <td [routerLink]="['/admin/territories/detail/' + territory.number]" *ngIf="i < displayCount">{{ territory.state }}</td>
+                        <td [routerLink]="['/admin/territories/detail/' + territory.number]" *ngIf="i < displayCount">{{ territory.state ? territory.state : 'Not Assigned' }}</td>
                         <td [routerLink]="['/admin/territories/detail/' + territory.number]" *ngIf="i < displayCount">{{ territory.type }}</td>
-                        <td [routerLink]="['/admin/territories/detail/' + territory.number]" *ngIf="i < displayCount">{{ territory.publisher }}</td>
+                        <td [routerLink]="['/admin/territories/detail/' + territory.number]" *ngIf="i < displayCount">{{ territory.publisher !== '1' ? territory.publisher : 'Sin asignar' }}</td>
                     </tr>
                 </tbody>
             </table>
