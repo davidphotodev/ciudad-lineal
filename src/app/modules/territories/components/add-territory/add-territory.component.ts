@@ -35,7 +35,7 @@ export class AddTerritoryComponent implements OnInit, OnDestroy {
                private publishersService: PublishersService ){}
 
   ngOnInit(): void {
-    this.publishersService.getPublisher()
+    this.publishersService.getPublishers()
       .pipe( takeUntil( this.destroyObs$ ) )
       .subscribe(
         publishers => {

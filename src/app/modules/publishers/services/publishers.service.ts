@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, doc, getDoc } from '@angular/fire/firestore';
 import { Publisher } from '../models/publisher.interface';
 import { Observable } from 'rxjs';
 
@@ -15,8 +15,19 @@ export class PublishersService {
     return addDoc( publisherRef, publisher );
   }
 
-  getPublisher(): Observable<Publisher[]> {
+  getPublishers(): Observable<Publisher[]> {
     const publisherRef = collection( this.firestore, 'publishers' );
     return collectionData( publisherRef, { idField: 'id' } ) as Observable<Publisher[]>;
+  }
+
+  async getPublisherById( id: string ): Promise<any> {
+    const publishRef = doc( this.firestore, 'publishers', id );
+    try{
+      const publishSnap = await getDoc(publishRef); 
+      return publishSnap.data();
+    }
+    catch(error){
+      console.log(error);
+    }
   }
 }

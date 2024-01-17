@@ -16,7 +16,7 @@ export class ListComponent implements OnInit {
   constructor( private publishersService: PublishersService ){}
 
   ngOnInit(): void {
-    this.publishersService.getPublisher()
+    this.publishersService.getPublishers()
       .subscribe(
         publishers => {
           this.publishers = publishers;
