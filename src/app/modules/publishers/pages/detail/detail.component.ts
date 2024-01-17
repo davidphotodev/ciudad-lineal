@@ -1,19 +1,31 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { PublishersService } from '../../services/publishers.service';
+import { Publisher } from '../../models/publisher.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.sass']
 })
-export class DetailComponent {
-
+export class DetailComponent implements OnInit {
+  
   public finishModalClass: string = 'd-none';
+  public publisher!: Publisher;
+  public slug: string = '';
 
-  public maps: any[] = [
-    {
-      number: '169',
-    }
-  ];
+  constructor( private publishersService: PublishersService,
+               private activatedRoute: ActivatedRoute ){}
+  
+  async ngOnInit(): Promise<void> {
+    this.activatedRoute.params
+      .subscribe(
+        async ({ id }) => {
+          const getPublisher = await this.publishersService.getPublisherById( id );
+          this.publisher = getPublisher;
+        }
+      );
+  }
 
   hideModal( value: string ){
     this.finishModalClass = value;

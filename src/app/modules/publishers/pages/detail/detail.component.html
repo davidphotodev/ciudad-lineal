@@ -1,20 +1,20 @@
-<div class="container">
+<div *ngIf="publisher !== undefined" class="container">
     <div class="row">
         <div class="col-12 col-md-6">
             <div class="card card-simple-info border-none my-2 p-1">
                 <div class="card-body">
-                    <h5 class="card-title">Sócrates Crespo</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">socratescrespo@gmail.com</h6>
+                    <h5 class="card-title">{{ publisher.firstname + ' ' + publisher.lastname }}</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">{{ publisher.email }}</h6>
                     <hr>
                     <div class="row py-3">
                         <div class="col-12 col-md-7">
-                            <p><strong>Teléfono: </strong>604 21 60 37</p>
-                            <p><strong>Dirección: </strong>Calle de Emilio Ferrari 61, 1A</p>
-                            <p><strong>Detalle: </strong>Publicador</p>
+                            <p><strong>Teléfono: </strong>{{ publisher.phone }}</p>
+                            <p><strong>Dirección: </strong>{{ publisher.address }}</p>
+                            <p><strong>Detalle: </strong> {{ publisher.description }} </p>
                         </div>
-                        <div class="col-12 col-md-5 text-center">
+                        <div *ngIf="publisher.history.length > 0" class="col-12 col-md-5 text-center">
                             <h5 class="text-center">Territorios asignados</h5>
-                            <p class="text-center"><strong>169</strong></p>
+                            <p *ngFor="let territory of publisher.territories" class="text-center"><strong>{{ territory }}</strong></p>
 
                             <button (click)="hideModal( 'd-block' )" class="btn btn-dark mx-1">Terminar</button>
                         </div>
@@ -26,13 +26,12 @@
                     <div class="card-body">
                         <h5 class="card-title">Historial</h5>
                         <div class="row py-1">
-                            <div class="history-log col-12 my-1 p-3">
+                            <div *ngFor="let movement of publisher.history" class="history-log col-12 my-1 p-3">
                                 <p><strong>Teritorio: </strong>35</p>
                                 <p><strong>Comenzado: </strong>03-04-2023 | <strong>Terminado: </strong>05-05-2023</p>
                             </div>
-                            <div class="history-log col-12 my-1 p-3">
-                                <p><strong>Teritorio: </strong>92</p>
-                                <p><strong>Comenzado: </strong>08-01-2023 | <strong>Terminado: </strong>05-02-2023</p>
+                            <div *ngIf="publisher.history.length == 0" class="py-3">
+                                <p>El publicador no tiene historial</p>
                             </div>
                         </div>
                     </div>
@@ -43,15 +42,22 @@
         <div class="col-12 col-md-6">
             <div class="card card-simple-info border-none my-2 p-1">
                 <div class="card-body">
-                    <h5 class="card-title">Territorios asignados</h5>
-                    <h6 class="card-subtitle mb-2 text-body-secondary">Mapas de los territorios</h6>
-                    <div class="working-maps text-center" *ngFor="let map of maps">
-                        <hr>
-                        <figure class="map">
-                            <img class="w-75" src="http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-{{ map.number }}.png" alt="territorio {{ map.number }}">
-                        </figure>
-                        <hr>
-                    </div>
+                        <h5 class="card-title">Territorios asignados</h5>
+                        <h6 class="card-subtitle mb-2 text-body-secondary">Mapas de los territorios</h6>
+                        <div *ngFor="let territory of publisher.territories" class="asigned">
+                            <div class="working-maps text-center">
+                                <hr>
+                                <p>Territorio {{ territory }}</p>
+                                <figure class="map">
+                                    <img class="w-75" src="http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-{{ territory }}.png" alt="territorio {{ territory }}">
+                                </figure>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="py-3">
+                            <p *ngIf="publisher?.territories?.length == 0">El publicador no tiene territorios asignados</p>
+                            <button class="btn btn-dark my-1">Asignar</button>
+                        </div>
                 </div>
             </div>
         </div>
@@ -67,6 +73,6 @@
     </div>
 </div>
 
-<div class="finish-territory-modal {{ finishModalClass }}">
+<div [class]="finishModalClass" class="finish-territory-modal">
     <app-finish-territory (childEvent)="hideModal($event)"></app-finish-territory>
 </div>
