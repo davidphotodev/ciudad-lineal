@@ -1,14 +1,14 @@
-<div class="container">
+<div *ngIf="territory! !== undefined" class="container">
     <div class="row">
 
         <div class="col-12 col-md-7">
             <div class="card card-simple-info border-none my-2 p-1">
                 <div class="card-body">
-                    <h5 class="card-title">Territorio 3</h5>
+                    <h5 class="card-title">Territorio {{ territory.number }}</h5>
                     <hr>
                     <div class="img-territory">
                         <figure>
-                            <img class="w-100" src="http://grafi-web.com/ciudadlineal/wp-content/uploads/2023/06/territorio-1.png" alt="Territorio 1">
+                            <img class="w-100" src="{{ territory.map }}" alt="Territorio {{ territory.number }}">
                         </figure>
                         <div>
                            <button class="btn btn-success">Enviar por Whatsapp</button>
@@ -24,24 +24,23 @@
                     <div class="card-inner">
                         <h5 class="card-title">Detalles del territorio</h5>
                         <hr>
-                        <p><strong>Tipo: </strong>Difícil Acceso</p>
-                        <p><strong>Publicador asignado: </strong>Sócrates Crespo</p>
-                        <p><strong>Último período trabajado: </strong> 02-07-2023 - </p>
-                        <p><strong>Detalles: </strong>Se deben hacer todos los portales</p>
-                        <button (click)="hideModal( 'd-block' )" class="btn btn-dark">Terminar territorio</button>
+                        <p><strong>Tipo: </strong>{{ territory.type | titlecase }}</p>
+                        <p><strong>Publicador asignado: </strong>{{ territory.publisher ? territory.publisher : 'No está asignado' }}</p>
+                        <p><strong>Detalles: </strong>{{ territory.description ? territory.description : 'No hay descripción' }}</p>
+                        <button *ngIf="territory.publisher !== ''" (click)="hideModal( 'd-block' )" class="btn btn-dark">Terminar territorio</button>
+                        <button *ngIf="territory.publisher === ''" (click)="hideModal( 'd-block' )" class="btn btn-dark">Asignar territorio</button>
                         <hr>
                     </div>
 
                     <div class="card-inner py-3">
                         <h5 class="card-title">Historial</h5>
                         <div class="row py-1">
-                            <div class="history-log col-12 my-1 p-3">
-                                <p><strong>Publicador: </strong>Joan Mendez</p>
-                                <p><strong>Comenzado: </strong>03-04-2023 | <strong>Terminado: </strong>05-05-2023</p>
+                            <div *ngFor="let movement of territory!.history" class="history-log col-12 my-1 p-3">
+                                <p><strong>Publicador: </strong> {{ movement.publisher }} </p>
+                                <p><strong>Comenzado: </strong> {{ movement.date_init }} | <strong>Terminado: </strong>{{ movement.date_end }}</p>
                             </div>
-                            <div class="history-log col-12 my-1 p-3">
-                                <p><strong>Publicador: </strong>David Adan</p>
-                                <p><strong>Comenzado: </strong>08-01-2023 | <strong>Terminado: </strong>05-02-2023</p>
+                            <div *ngIf="territory!.history.length === 0" class="history-log col-12 my-1 p-3">
+                                <p>No hay movimientos</p>
                             </div>
                         </div>
                     </div>
@@ -54,6 +53,6 @@
     </div>
 </div>
 
-<div class="finish-territory-modal {{ finishModalClass }}">
+<div *ngIf="territory! !== undefined" [class]="finishModalClass" class="finish-territory-modal">
     <app-finish-territory (childEvent)="hideModal($event)"></app-finish-territory>
 </div>
