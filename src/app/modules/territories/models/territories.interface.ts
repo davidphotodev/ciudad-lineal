@@ -1,4 +1,5 @@
 export interface Territory{
+    id?: string,
     number: number,
     description: string,
     history: TerritoryHistory[],
