@@ -29,7 +29,6 @@ export class ListComponent implements OnInit {
     this.territoriesService.getTerritories()
       .subscribe(
         territories => {
-          console.log(territories);
           this.territories = territories;
         })
   }
