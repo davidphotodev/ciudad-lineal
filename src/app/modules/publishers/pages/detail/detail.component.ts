@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PublishersService } from '../../services/publishers.service';
 import { Publisher } from '../../models/publisher.interface';
 import { ActivatedRoute } from '@angular/router';
+import { image } from 'src/assets/vars/globals';
 
 @Component({
   selector: 'app-detail',
@@ -12,7 +13,7 @@ export class DetailComponent implements OnInit {
   
   public finishModalClass: string = 'd-none';
   public publisher!: Publisher;
-  public slug: string = '';
+  public imgSlug: string = image.slug;
 
   constructor( private publishersService: PublishersService,
                private activatedRoute: ActivatedRoute ){}
