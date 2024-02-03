@@ -54,5 +54,5 @@
 </div>
 
 <div *ngIf="territory! !== undefined" [class]="finishModalClass" class="finish-territory-modal">
-    <app-finish-territory (childEvent)="hideModal($event)"></app-finish-territory>
+    <app-finish-territory [territory]="territory" [idTerritory]="idTerritory" [idPublisher]="territory.publisher_id!" (childEvent)="hideModal($event)"></app-finish-territory>
 </div>

@@ -6,6 +6,7 @@ export interface Territory{
     type: string,
     map: string,
     publisher: string,
+    publisher_id?: string,
     state: string,
     last_date: string
 }

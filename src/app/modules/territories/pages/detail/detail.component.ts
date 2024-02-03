@@ -13,6 +13,8 @@ export class DetailComponent implements OnInit {
   public finishModalClass: string = 'd-none';
   public whatsappNumber: string = '604216037';
   public territory!: Territory;
+  public idTerritory!: string;
+  public lastDate!: string;
 
   constructor( private territoriesService: TerritoriesService,
                private activatedRoute: ActivatedRoute ){}
@@ -24,11 +26,15 @@ export class DetailComponent implements OnInit {
         async ({ id }) => {
           const territoryData = await this.territoriesService.getTerritoryById( id );
           this.territory = territoryData;
-          console.log(this.territory.history)
+          this.idTerritory = id;
         }
       );
   }
 
+  assignTerritory( id: string ){
+    this.territoriesService.assignTerritory( id );
+    alert('Territorio modificado!');
+  }
 
   hideModal( value: string ){
     this.finishModalClass = value;
