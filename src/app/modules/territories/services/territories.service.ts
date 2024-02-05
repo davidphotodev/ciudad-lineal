@@ -55,11 +55,11 @@ export class TerritoriesService {
         { 
           state: 'Not assigned',
           publisher: '',
-          history: {
+          history: [{
             date_init: territory.last_date,
             date_end: date_end,
             publisher: publisher.firstname + ' ' + publisher.lastname,
-          },
+          }],
           publisher_id: ''
         }
       );
