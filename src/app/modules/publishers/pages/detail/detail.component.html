@@ -31,7 +31,7 @@
                                 <p><strong>Teritorio: </strong>{{ movement.territoryNumber }}</p>
                                 <p><strong>Comenzado: </strong>{{ movement.date_init }} | <strong>Terminado: </strong> {{ movement.date_end }} </p>
                             </div>
-                            <div *ngIf="publisher.history.length === 0" class="py-3">
+                            <div *ngIf="publisher!.history.length === 0" class="py-3">
                                 <p>El publicador no tiene historial</p>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                         <div class="py-3">
                             <p *ngIf="publisher?.territories?.length == 0">El publicador no tiene territorios asignados</p>
                             <button *ngIf="publisher?.territories?.length == 0" class="btn btn-dark my-1">Asignar</button>
-                            <button *ngIf="publisher?.territories?.length !== 0" class="btn btn-dark my-1">Terminar</button>
+                            <button *ngIf="publisher?.territories?.length !== 0" class="btn btn-dark my-1" (click)="hideModal('d-block')">Terminar</button>
                         </div>
                 </div>
             </div>
