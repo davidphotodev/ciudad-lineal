@@ -4,6 +4,7 @@ import { ListComponent } from './pages/list/list.component';
 import { RouterModule, Routes } from '@angular/router';
 import { DetailComponent } from './pages/detail/detail.component';
 import { AddTerritoryComponent } from './components/add-territory/add-territory.component';
+import { AssignTerritoryComponent } from './components/assign-territory/assign-territory.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: '', component:ListComponent },
       { path: 'detail/:id', component:DetailComponent },
       { path: 'add', component:AddTerritoryComponent },
+      { path: 'assign/:id', component:AssignTerritoryComponent },
       { path: '**', redirectTo: '/' }
     ]
   }
