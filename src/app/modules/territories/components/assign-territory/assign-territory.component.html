@@ -1,0 +1,23 @@
+<div *ngIf="territory! !== undefined" class="container p-3">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="text-center">Asignar territorio {{ territory.number }}</h1>
+            <form action="" class="form-control w-50 m-auto p-3">
+                <div class="py-2">
+                    <label for="publisher" class="p-1">Publicador</label>
+                    <input #publiSelector (keypress)="showList( publiSelector.value )" type="text" name="publisher" placeholder="Buscar..." class="form-control">
+                </div>
+                <div id="publisher-list" class="p-3 d-none border position-absolute bg-white w-auto">
+                    <p *ngFor="let option of testPublishers">{{ option }}</p>
+                </div>
+                <div class="py-2">
+                    <label for="description">Detalle (opcional)</label>
+                    <input type="text" name="description" class="form-control">
+                </div>
+                <div class="py-2">
+                    <button type="submit" class="btn btn-dark">Asignar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
