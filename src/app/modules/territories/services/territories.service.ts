@@ -32,18 +32,64 @@ export class TerritoriesService {
     }
   }
 
-  async assignTerritory( id: string ): Promise<any>{
-    const terrRef = doc( this.firestore, 'territories', id );
+  async assignTerritory( territory: Territory, publisher: Publisher, description: string, date_init: string ): Promise<any>{
+    const publisher_id = publisher.id ? publisher.id : '';
+    const territory_id = territory.id ? territory.id : '';
+    const terrRef = doc( this.firestore, 'territories', territory_id );
+    const publiRef = doc( this.firestore, 'publishers', publisher_id );
+    const moveRef = collection(this.firestore, 'movements');
+
+    // Script for territory
     try{
-     const terrSnap = await updateDoc( terrRef, { state: 'Assigned', publisher: 'Testing too' } );
+     const terrSnap = await updateDoc( terrRef,
+       { state: 'Assigned',
+         publisher: publisher.firstname + ' ' + publisher.lastname,
+         publisher_id: publisher.id,
+         last_date: date_init
+       });
     }
     catch(error){
       console.log(error);
     }
+
+    // Script Publisher
+    try{
+      const publiSnap = await updateDoc(
+        publiRef,
+        {
+          territories: [ territory.number ],
+          history: [{
+            territory: territory.number,
+            date_init: date_init,
+            date_end: '-'
+          }]
+        }
+      )
+
+    }catch(error){
+      console.log(error);
+    }
+
+    // Script Movements
+    try{
+      addDoc(
+        moveRef,
+        {
+          date_init: date_init,
+          date_end: '-',
+          publisher: publisher.firstname + ' ' + publisher.lastname,
+          subject: 'Asignado',
+          territory: territory.number,
+          description: description
+        }
+      )
+    }catch(error){
+      console.log(error);
+    }
+
   }
 
   async finishTerritory( publisher_id: string, territory_id: string, publisher: Publisher, territory: Territory, date_end: string ): Promise<any>{
-    console.log( 'Id del territorio: ' + territory.id );
     const terrRef = doc( this.firestore, 'territories', territory_id );
     const publiRef = doc( this.firestore, 'publishers', publisher_id );
     const moveRef = collection(this.firestore, 'movements');

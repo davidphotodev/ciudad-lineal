@@ -32,8 +32,7 @@ export class DetailComponent implements OnInit {
   }
 
   assignTerritory( id: string ){
-    this.territoriesService.assignTerritory( id );
-    alert('Territorio modificado!');
+
   }
 
   hideModal( value: string ){
