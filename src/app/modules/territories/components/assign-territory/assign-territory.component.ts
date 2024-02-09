@@ -6,6 +6,7 @@ import { Publisher } from 'src/app/modules/publishers/models/publisher.interface
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { DatesService } from 'src/app/core/services/dates.service';
 
 @Component({
   selector: 'app-assign-territory',
@@ -24,30 +25,19 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
   public success: boolean = false;
 
   public assignForm: FormGroup = this.fb.group({
-    publisher: ['', [ Validators.required, Validators.min(1) ]],
-    description: ['', [ Validators.required, Validators.min(1) ]]
+    publisher: ['', [ Validators.required, Validators.minLength(1) ]],
+    description: ['']
   });
   
-  formattedDate: string;
+  formattedDate!: string;
 
   constructor( 
     private territoriesService: TerritoriesService,
     private publishersService: PublishersService,
     private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder
-    ){
-      // Get and formatting end date
-      const currentDate: Date = new Date();
-
-      const day: number = currentDate.getDate();
-      const month: number = currentDate.getMonth() + 1;
-      const year: number = currentDate.getFullYear();
-
-      const formattedDay: string = (day < 10) ? '0' + day : day.toString();
-      const formattedMonth: string = (month < 10) ? '0' + month : month.toString();
-
-      this.formattedDate = formattedDay + '-' + formattedMonth + '-' + year;
-    }
+    private fb: FormBuilder,
+    private datesService: DatesService
+    ){}
 
   async ngOnInit() {
   // Getting current territory data
@@ -86,6 +76,10 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
     this.destroyObs$.complete();
   }
 
+  currentDate(){
+    this.formattedDate = this.datesService.getCurrentDate();
+  }
+
   // Search publishers while name is writing
   showList(){
     let search: string = this.assignForm.value.publisher;
@@ -122,7 +116,10 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
   }
 
   // Assigning territory to publisher
-  async assignTerritory( territory: Territory, publisher: Publisher, description: string, date_init: string ){
+  async assignTerritory( territory: Territory, publisher: Publisher){
+    const description = this.assignForm.value.description;
+    const data_init = this.datesService.getCurrentDate();
+  
     if( this.assignForm.disabled ){
       return;
     }
@@ -132,7 +129,7 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
       return;
     }
 
-    await this.territoriesService.assignTerritory( territory, publisher, description, date_init );
+    await this.territoriesService.assignTerritory( territory, publisher, description, data_init );
     this.success = true;
     this.assignForm.disable();
   }
