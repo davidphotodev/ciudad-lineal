@@ -27,7 +27,7 @@ export class PublishersService {
       return publishSnap.data();
     }
     catch(error){
-      console.log(error);
+      console.error('Error en la promesa:', error);
     }
   }
 }
