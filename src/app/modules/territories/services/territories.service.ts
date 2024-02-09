@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, arrayUnion, collection, collectionData, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Territory } from '../models/territories.interface';
 import { Observable } from 'rxjs';
 import { Publisher } from '../../publishers/models/publisher.interface';
@@ -58,11 +58,11 @@ export class TerritoriesService {
         publiRef,
         {
           territories: [ territory.number ],
-          history: [{
+          history: arrayUnion({
             territory: territory.number,
             date_init: date_init,
             date_end: '-'
-          }]
+          })
         }
       )
 
@@ -101,11 +101,11 @@ export class TerritoriesService {
         { 
           state: 'Not assigned',
           publisher: '',
-          history: [{
+          history: arrayUnion({
             date_init: territory.last_date,
             date_end: date_end,
             publisher: publisher.firstname + ' ' + publisher.lastname,
-          }],
+          }),
           publisher_id: ''
         }
       );
@@ -119,11 +119,11 @@ export class TerritoriesService {
         publiRef,
         {
           territories: [],
-          history: {
+          history: arrayUnion({
             territory: territory.number,
             date_init: territory.last_date,
             date_end: date_end
-          }
+          })
         }
       )
 
