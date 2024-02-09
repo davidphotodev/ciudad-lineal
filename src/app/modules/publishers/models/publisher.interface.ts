@@ -17,7 +17,7 @@ export interface Territory {
 }
 
 export interface History{
-    territoryNumber: number,
+    territory: number,
     date_init: string,
     date_end: string
 }
