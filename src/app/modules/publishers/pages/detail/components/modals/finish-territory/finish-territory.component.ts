@@ -45,8 +45,10 @@ export class FinishTerritoryComponent {
   }
 
   async ngOnInit() {
-    const publish = await this.publishersService.getPublisherById( this.idPublisher );
-    this.publisher = publish;
+    if( this.idPublisher ){
+      const publish = await this.publishersService.getPublisherById( this.idPublisher );
+      this.publisher = publish;
+    }
   }
 
   finish( publisher_id: string, territory_id: string, publisher: Publisher, territory: Territory, date_end: string  ){
