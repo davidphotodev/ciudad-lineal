@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
@@ -18,9 +19,6 @@ export class FinishTerritoryComponent implements OnInit {
   public territory!: Territory;
 
   @Input()
-  public idTerritory!: string;
-
-  @Input()
   public publisher!: Publisher;
 
   @Input()
@@ -29,7 +27,8 @@ export class FinishTerritoryComponent implements OnInit {
   formattedDate: string;
   
   constructor( private territoriesService: TerritoriesService,
-               private publishersService: PublishersService ){
+               private publishersService: PublishersService,
+               private router: Router ){
     // Get and formatting end date
     const currentDate: Date = new Date();
 
@@ -44,14 +43,22 @@ export class FinishTerritoryComponent implements OnInit {
   }
 
   async ngOnInit() {
-    const publish = await this.publishersService.getPublisherById( this.idPublisher );
-    this.publisher = publish;
+    if( this.idPublisher ){
+      const publish = await this.publishersService.getPublisherById( this.idPublisher );
+      this.publisher = publish;
+    }
+    if( this.publisher ){
+      this.publisher.id = this.idPublisher;
+    }
   }
 
-  finish( publisher_id: string, territory_id: string, publisher: Publisher, territory: Territory, date_end: string  ){
-    this.territoriesService.finishTerritory(publisher_id, territory_id, publisher, territory, date_end);
-    this.childEvent.emit('d-none');
-    console.log('Territorio terminado');
+  async finish( publisher: Publisher, territory: Territory, date_end: string  ){
+    if( publisher.id && territory.id ){
+      await this.territoriesService.finishTerritory(publisher.id, territory.id, publisher, territory, date_end);
+      this.childEvent.emit('d-none');
+      console.log('Territorio terminado');
+      this.router.navigate(['/admin/territories']);
+    }
   }
   
   hideModal(){

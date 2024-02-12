@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PublishersService } from '../../services/publishers.service';
 import { Publisher } from '../../models/publisher.interface';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { image } from 'src/assets/vars/globals';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
@@ -50,7 +50,8 @@ export class DetailComponent implements OnInit, OnDestroy {
                private activatedRoute: ActivatedRoute,
                private territoriesService: TerritoriesService,
                private fb: FormBuilder,
-               private datesService: DatesService ){}
+               private datesService: DatesService,
+               private router: Router ){}
   
    ngOnInit() {
      this.getTerritories();

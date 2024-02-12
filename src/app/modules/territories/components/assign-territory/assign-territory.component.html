@@ -22,8 +22,11 @@
                     <label for="description">Detalle (opcional)</label>
                     <input type="text" name="description" formControlName="description" class="form-control">
                 </div>
-                <div class="py-2">
+                <div *ngIf="!success" class="py-2">
                     <button type="submit" class="btn btn-dark">Asignar</button>
+                </div>
+                <div *ngIf="success" class="py-2">
+                    <button type="submit" class="btn btn-dark">Ver territorio</button>
                 </div>
                 <div *ngIf="success" class="alert alert-success" role="alert">
                     ¡Territorio asignado!

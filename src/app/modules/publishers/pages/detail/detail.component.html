@@ -83,7 +83,7 @@
                                 </div>
                                 <div *ngIf="success" class="assigned">
                                     <div class="py-3">
-                                        <button class="btn btn-dark">Ver territorio</button>
+                                        <button [routerLink]="['/admin/territories/detail/' + territorySelected.id]" class="btn btn-dark">Ver territorio</button>
                                     </div>
                                     <div class="alert alert-success" role="alert">
                                         El territorio ha sido asignado
