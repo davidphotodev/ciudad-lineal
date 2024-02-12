@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
@@ -19,18 +20,13 @@ export class FinishTerritoryComponent {
   public territory!: Territory;
 
   @Input()
-  public idTerritory!: string;
-
-  @Input()
   public publisher!: Publisher;
-
-  @Input()
-  public idPublisher!: string;
 
   formattedDate: string;
 
   constructor( private territoriesService: TerritoriesService,
-               private publishersService: PublishersService ){
+               private publishersService: PublishersService,
+               private router: Router ){
     // Get and formatting end date
     const currentDate: Date = new Date();
 
@@ -45,15 +41,16 @@ export class FinishTerritoryComponent {
   }
 
   async ngOnInit() {
-    if( this.idPublisher ){
-      const publish = await this.publishersService.getPublisherById( this.idPublisher );
+    if( this.publisher.id ){
+      const publish = await this.publishersService.getPublisherById( this.publisher.id );
       this.publisher = publish;
     }
   }
 
-  finish( publisher_id: string, territory_id: string, publisher: Publisher, territory: Territory, date_end: string  ){
-    this.territoriesService.finishTerritory(publisher_id, territory_id, publisher, territory, date_end);
+  finish( publisher: Publisher, territory: Territory, date_end: string  ){
+    this.territoriesService.finishTerritory('sgregrsgrs', 'gaegeagegd', publisher, territory, date_end);
     this.childEvent.emit('d-none');
+    this.router.navigate(['/admin/publishers/detail', publisher.id]);
     console.log('Territorio terminado');
   }
 
