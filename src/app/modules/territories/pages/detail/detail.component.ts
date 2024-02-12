@@ -13,7 +13,6 @@ export class DetailComponent implements OnInit {
   public finishModalClass: string = 'd-none';
   public whatsappNumber: string = '604216037';
   public territory!: Territory;
-  public idTerritory!: string;
   public lastDate!: string;
 
   constructor( private territoriesService: TerritoriesService,
@@ -25,8 +24,10 @@ export class DetailComponent implements OnInit {
       .subscribe(
         async ({ id }) => {
           const territoryData = await this.territoriesService.getTerritoryById( id );
-          this.territory = territoryData;
-          this.idTerritory = id;
+          if( territoryData ){
+            this.territory = territoryData;
+            this.territory.id = id;
+          }
         }
       );
   }

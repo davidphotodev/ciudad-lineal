@@ -18,7 +18,19 @@ import * as moment from 'moment';
 export class DetailComponent implements OnInit, OnDestroy {
   
   public finishModalClass: string = 'd-none';
-  public publisher!: Publisher;
+  public publisher: Publisher = {
+    id: '',
+    firstname: '',
+    lastname: '',
+    publisherType: '',
+    email: '',
+    phone: '',
+    whatsapp: '',
+    description: '',
+    address: '',
+    territories: [],
+    history: []
+  };
   public imgSlug: string = image.slug;
   public showForm: boolean = false;
   public showList: boolean = false;
@@ -41,8 +53,8 @@ export class DetailComponent implements OnInit, OnDestroy {
                private datesService: DatesService ){}
   
    ngOnInit() {
-      this.getCurrentPublisherData();
-      this.getTerritories();
+     this.getTerritories();
+     this.getCurrentPublisherData();
   }
 
   ngOnDestroy() {
@@ -61,12 +73,13 @@ export class DetailComponent implements OnInit, OnDestroy {
       );
   }
 
-  assignTerritory(){
-
+  async assignTerritory(){
     const territory = this.territorySelected;
     const publisher = this.publisher;
+    const description = this.assignForm.value.description;
+    const currentDate = moment().format('DD-MM-YYYY');
 
-    if( this.assignForm.disabled ){
+    if( this.assignForm.disabled || this.assignForm.invalid ){
       return;
     }
 
@@ -75,9 +88,7 @@ export class DetailComponent implements OnInit, OnDestroy {
       return;
     }
     
-    const description = this.assignForm.value.description;
-    const currentDate = moment().format('DD-MM-YYYY');
-    this.territoriesService.assignTerritory( territory, publisher, description, currentDate );
+    await this.territoriesService.assignTerritory( territory, publisher, description, currentDate );
     this.assignForm.disable();
     this.success = true;
   }

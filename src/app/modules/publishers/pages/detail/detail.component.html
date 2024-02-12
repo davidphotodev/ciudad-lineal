@@ -107,5 +107,5 @@
 </div>
 
 <div [class]="finishModalClass" class="finish-territory-modal">
-    <app-finish-territory (childEvent)="hideModal($event)"></app-finish-territory>
+    <app-finish-territory [publisher]="publisher" [territory]="territorySelected" (childEvent)="hideModal($event)"></app-finish-territory>
 </div>

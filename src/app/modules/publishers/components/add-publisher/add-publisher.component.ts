@@ -46,10 +46,13 @@ export class AddPublisherComponent {
       territories: []
     };
 
-    const response = await this.publisherService.addPublisher( newPublisher );
-    this.error = false;
-    this.added = true;
-    this.addForm.reset();
+    if( newPublisher ){
+      const response = await this.publisherService.addPublisher( newPublisher );
+      this.error = false;
+      this.added = true;
+      this.addForm.reset();
+    }
+
   }
 
 }
