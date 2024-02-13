@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FirestoreModule } from '@angular/fire/firestore';
 import { AssignTerritoryComponent } from './components/assign-territory/assign-territory.component';
 import { DetailModule } from './pages/detail/detail.module';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -21,7 +22,8 @@ import { DetailModule } from './pages/detail/detail.module';
     ListModule,
     TerritoriesRoutingModule,
     ReactiveFormsModule,
-    FirestoreModule
+    FirestoreModule,
+    RouterModule
   ]
 })
 export class TerritoriesModule { }

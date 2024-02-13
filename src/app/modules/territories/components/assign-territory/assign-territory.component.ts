@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Territory } from '../../models/territories.interface';
 import { TerritoriesService } from '../../services/territories.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
@@ -36,7 +36,8 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
     private publishersService: PublishersService,
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private datesService: DatesService
+    private datesService: DatesService,
+    private router: Router
     ){}
 
   async ngOnInit() {

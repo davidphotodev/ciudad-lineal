@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
 import { TerritoriesService } from 'src/app/modules/territories/services/territories.service';
 import { DatesService } from 'src/app/core/services/dates.service';
-import { Subject, takeUntil } from 'rxjs';
+import { Subject, filter, firstValueFrom, takeUntil } from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
@@ -65,14 +65,13 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   async getCurrentPublisherData(){
-    this.activatedRoute.params
-      .subscribe(
-        async ({ id }) => {
-          const getPublisher = await this.publishersService.getPublisherById( id );
-          this.publisher = getPublisher;
-          this.publisher.id = id;
-        }
-      );
+    try {
+      const { id } = await firstValueFrom( this.activatedRoute.params.pipe( filter( res => !!res ) ) )
+      const getPublisher = await this.publishersService.getPublisherById( id );
+      this.publisher = { id, ...getPublisher };
+    } catch (error) {
+      // Manage error
+    }
   }
 
   async assignTerritory(){

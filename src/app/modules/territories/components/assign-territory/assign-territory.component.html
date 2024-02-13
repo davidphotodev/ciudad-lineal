@@ -6,7 +6,7 @@
                 <div class="py-2">
                     <label for="publisher" class="p-1">Publicador</label>
                     <input #publiSelector (keyup)="showList()" type="text" name="publisher" formControlName="publisher" placeholder="Buscar..." class="form-control">
-                    <small class="text-danger" *ngIf="assignForm.get('publisher')?.touched && (assignForm.get('publisher')?.invalid || !publisherSelected)">Debes seleccionar un publicador</small>
+                    <small class="text-danger" *ngIf="assignForm.get('publisher')?.touched && (assignForm.get('publisher')?.invalid || !publisherSelected) && !list">Debes seleccionar un publicador</small>
                     <div *ngIf="list === true" id="publisher-list" class= "border position-absolute bg-white w-25">
                         <ul class="m-0 p-0">
                             <li *ngIf="resultPublishers.length == 0" class="p-2">
@@ -26,7 +26,7 @@
                     <button type="submit" class="btn btn-dark">Asignar</button>
                 </div>
                 <div *ngIf="success" class="py-2">
-                    <button type="submit" class="btn btn-dark">Ver territorio</button>
+                    <button [routerLink]="['/admin/territories/detail/' + territory.id]" type="submit" class="btn btn-dark">Ver territorio</button>
                 </div>
                 <div *ngIf="success" class="alert alert-success" role="alert">
                     ¡Territorio asignado!
