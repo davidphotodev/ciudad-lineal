@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatesService } from 'src/app/core/services/dates.service';
 import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
@@ -22,23 +23,12 @@ export class FinishTerritoryComponent {
   @Input()
   public publisher!: Publisher;
 
-  formattedDate: string;
+  finalizedSuccessfully : boolean = false;
 
   constructor( private territoriesService: TerritoriesService,
                private publishersService: PublishersService,
-               private router: Router ){
-    // Get and formatting end date
-    const currentDate: Date = new Date();
-
-    const day: number = currentDate.getDate();
-    const month: number = currentDate.getMonth() + 1;
-    const year: number = currentDate.getFullYear();
-
-    const formattedDay: string = (day < 10) ? '0' + day : day.toString();
-    const formattedMonth: string = (month < 10) ? '0' + month : month.toString();
-
-    this.formattedDate = formattedDay + '-' + formattedMonth + '-' + year;
-  }
+               private router: Router,
+               private dates: DatesService ){}
 
   async ngOnInit() {
     if( this.publisher.id ){
@@ -47,11 +37,15 @@ export class FinishTerritoryComponent {
     }
   }
 
-  finish( publisher: Publisher, territory: Territory, date_end: string  ){
-    this.territoriesService.finishTerritory('sgregrsgrs', 'gaegeagegd', publisher, territory, date_end);
-    this.childEvent.emit('d-none');
-    this.router.navigate(['/admin/publishers/detail', publisher.id]);
-    console.log('Territorio terminado');
+  async finish(){
+    const territory = this.territory;
+    const publisher = this.publisher;
+    const date_end = this.dates.getCurrentDate();
+
+    if( !publisher.id || !territory.id ) return;
+
+    await this.territoriesService.finishTerritory(publisher, territory, date_end);
+    this.finalizedSuccessfully = true;
   }
 
   hideModal(){

@@ -8,7 +8,7 @@ export interface Publisher {
     whatsapp: string,
     description: string,
     address: string,
-    territories: Territory[],
+    territories: number[],
     history: History[]
 }
 

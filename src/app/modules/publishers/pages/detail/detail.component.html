@@ -49,11 +49,11 @@
                                 </figure>
                                 <hr>
                             </div>
+                            <button *ngIf="publisher?.territories?.length !== 0" class="btn btn-dark my-1" (click)="finishThisTerritory(territory)">Terminar</button>
                         </div>
                         <div *ngIf="showForm === false" class="py-3">
                             <p *ngIf="publisher?.territories?.length == 0">El publicador no tiene territorios asignados</p>
                             <button (click)="displayForm()" *ngIf="publisher?.territories?.length == 0" class="btn btn-dark my-1">Asignar</button>
-                            <button *ngIf="publisher?.territories?.length !== 0" class="btn btn-dark my-1" (click)="hideModal('d-block')">Terminar</button>
                         </div>
                         <div *ngIf="showForm" class="assign-form">
                             <h5>Asignar territorio</h5>
@@ -107,5 +107,5 @@
 </div>
 
 <div [class]="finishModalClass" class="finish-territory-modal">
-    <app-finish-territory [publisher]="publisher" [territory]="territorySelected" (childEvent)="hideModal($event)"></app-finish-territory>
+    <app-finish-territory [publisher]="publisher" [territory]="currentTerritory" (childEvent)="hideModal($event)"></app-finish-territory>
 </div>

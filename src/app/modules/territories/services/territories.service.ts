@@ -89,9 +89,11 @@ export class TerritoriesService {
 
   }
 
-  async finishTerritory( publisher_id: string, territory_id: string, publisher: Publisher, territory: Territory, date_end: string ): Promise<any>{
-    const terrRef = doc( this.firestore, 'territories', territory_id );
+  async finishTerritory( publisher: Publisher, territory: Territory, date_end: string ): Promise<any>{
+    const publisher_id = publisher.id ? publisher.id : '';
+    const territory_id = territory.id ? territory.id : '';
     const publiRef = doc( this.firestore, 'publishers', publisher_id );
+    const terrRef = doc( this.firestore, 'territories', territory_id );
     const moveRef = collection(this.firestore, 'movements');
 
     // Script Territory
@@ -106,6 +108,7 @@ export class TerritoriesService {
             date_end: date_end,
             publisher: publisher.firstname + ' ' + publisher.lastname,
           }),
+          last_date: date_end,
           publisher_id: ''
         }
       );

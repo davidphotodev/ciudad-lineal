@@ -18,8 +18,22 @@ import * as moment from 'moment';
 export class DetailComponent implements OnInit, OnDestroy {
   
   public finishModalClass: string = 'd-none';
+  public imgSlug: string = image.slug;
+  public showForm: boolean = false;
+  public showList: boolean = false;
+  public currentTerritory!: Territory;
+  public territories!: Territory[];
+  public territoriesToAssign!: Territory[];
+  public territorySelected!: Territory;
+  public error: boolean = false;
+  public success: boolean = false;
+  public destroyObs$: Subject<void> = new Subject();
+  public assignForm: FormGroup = this.fb.group({
+    territory: ['', [Validators.required, Validators.min(1)]],
+    description: ['']
+  });
   public publisher: Publisher = {
-    id: '',
+  id: '',
     firstname: '',
     lastname: '',
     publisherType: '',
@@ -31,19 +45,6 @@ export class DetailComponent implements OnInit, OnDestroy {
     territories: [],
     history: []
   };
-  public imgSlug: string = image.slug;
-  public showForm: boolean = false;
-  public showList: boolean = false;
-  public territories!: Territory[];
-  public territoriesToAssign!: Territory[];
-  public territorySelected!: Territory;
-  public error: boolean = false;
-  public success: boolean = false;
-  public assignForm: FormGroup = this.fb.group({
-    territory: ['', [Validators.required, Validators.min(1)]],
-    description: ['']
-  });
-  public destroyObs$: Subject<void> = new Subject();
   
 
   constructor( private publishersService: PublishersService,
@@ -125,6 +126,16 @@ export class DetailComponent implements OnInit, OnDestroy {
     if( territoryNumber == 0 || !territoryNumber ){
       this.showList = false;
     }
+  }
+
+  finishThisTerritory( number: number ){
+    const territory = this.territories.find( territory => territory.number === number );
+    if ( territory ){
+      this.currentTerritory = territory;
+    }
+
+    this.finishModalClass = 'd-block';
+
   }
 
   hideModal( value: string ){

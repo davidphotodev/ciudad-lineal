@@ -53,12 +53,12 @@ export class FinishTerritoryComponent implements OnInit {
   }
 
   async finish( publisher: Publisher, territory: Territory, date_end: string  ){
-    if( publisher.id && territory.id ){
-      await this.territoriesService.finishTerritory(publisher.id, territory.id, publisher, territory, date_end);
+    if( !publisher.id && !territory.id ) return;
+      await this.territoriesService.finishTerritory(publisher, territory, date_end);
       this.childEvent.emit('d-none');
       console.log('Territorio terminado');
       this.router.navigate(['/admin/territories']);
-    }
+
   }
   
   hideModal(){
