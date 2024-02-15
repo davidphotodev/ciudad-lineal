@@ -1,0 +1,31 @@
+<section class="container">
+    <div class="row">
+        <div class="col-12 col-md-2"></div>
+        <div class="col-12 col-md-8">
+            <h1 class="text-center my-3">Historial de movimientos</h1>
+            <div class="card card-simple-info border-none m-2 p-3">
+                <div *ngFor="let movement of history" class="card-body m-2 border">
+                    <div class="card-inner">
+                        <h4 class="card-title">{{ movement.subject }}</h4>
+                    </div>
+    
+                    <div class="card-inner py-3">
+                        <div class="row py-1">
+                            <div class="col-6">
+                                <p><strong>Publicador: </strong> {{ movement.publisher }} </p>
+                                <p *ngIf="movement.subject == 'Asignado'" ><strong>Fecha: </strong> {{ movement.date_init }} </p>
+                                <p *ngIf="movement.subject == 'Terminado'"><strong>Fecha de inicio: </strong> {{ movement.date_init }} </p>
+                                <p *ngIf="movement.subject == 'Terminado'"><strong>Fecha de finalización: </strong> {{ movement.date_end }} </p>
+                            </div>
+                            <div class="col-6">
+                                <p><strong>Territorio: </strong>{{ movement.territory }}</p>
+                                <p><strong>Descripción: </strong>{{ movement.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-2"></div>
+    </div>
+</section>
