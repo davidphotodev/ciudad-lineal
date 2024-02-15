@@ -21,6 +21,10 @@ const routes: Routes = [
         loadChildren: () => import('./modules/territories/territories.module').then( m => m.TerritoriesModule )
       },
       {
+        path: 'history',
+        loadChildren: () => import('./modules/history/history.module').then( m => m.HistoryModule )
+      },
+      {
         path: '**',
         redirectTo: 'home'
       }
