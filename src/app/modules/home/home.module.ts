@@ -4,13 +4,17 @@ import { MainComponent } from './pages/main/main.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { MainInfoComponent } from './pages/main/components/main-info/main-info.component';
 import { RouterModule } from '@angular/router';
+import { HistoryInfoComponent } from './pages/main/components/history-info/history-info.component';
+import { ToExpireComponent } from './pages/main/components/to-expire/to-expire.component';
 
 
 
 @NgModule({
   declarations: [
     MainComponent,
-    MainInfoComponent
+    MainInfoComponent,
+    HistoryInfoComponent,
+    ToExpireComponent
   ],
   imports: [
     CommonModule,
