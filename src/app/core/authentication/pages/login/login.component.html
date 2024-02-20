@@ -6,7 +6,7 @@
                 <form class="form-control p-3" (ngSubmit)="onLogin( username, password )">
                     <input class="form-control my-3" id="username" [(ngModel)]="username" type="text" name="user" placeholder="Usuario">
                     <input class="form-control my-3" type="text" id="password" [(ngModel)]="password" name="password" placeholder="Contraseña">
-                    <button class="form-control btn btn-dark">Ingresar</button>
+                    <button class="form-control btn btn-custom">Ingresar</button>
                     <hr>
                     <div *ngIf="loginError" class="alert alert-danger" role="alert">
                         Los datos son incorrectos
