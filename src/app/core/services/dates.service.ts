@@ -26,6 +26,7 @@ export class DatesService {
     return this.formattedDate;
   }
 
+  // Get last date from territory
   dateToExpire( last_date: number ){
     const formatDate = last_date.toString();
     const expDAte = moment(formatDate, 'YYYYMMDD').fromNow();
