@@ -4,17 +4,14 @@
             <h2 class="text-center">Lista de Territorios</h2>
         </div>
         <div class="row my-2 p-2">
-            <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-custom">Todos</button>
+            <div class="col-6 col-md-4 my-2 text-center">
+                <button (click)="filterList('todos')" class="btn btn-custom">Todos</button>
             </div>
-            <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-custom">Asignados</button>
+            <div class="col-6 col-md-4 my-2 text-center">
+                <button (click)="filterList('Assigned')" class="btn btn-custom">Asignados</button>
             </div>
-            <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-custom">Disponibles</button>
-            </div>
-            <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-custom">Terminados</button>
+            <div class="col-6 col-md-4 my-2 text-center">
+                <button (click)="filterList('Not assigned')" class="btn btn-custom">Disponibles</button>
             </div>
         </div>
         <div class="table-responsive">
@@ -26,24 +23,27 @@
                         <th scope="col">Estado</th>
                         <th scope="col">Tipo</th>
                         <th scope="col">Publicador</th>
+                        <th scope="col">{{ listState == 'Not assigned' ? 'Fecha terminado' : 'Fecha de asignado' }}</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let territory of territories; index as i">
+                    <tr *ngFor="let territory of list; index as i">
                         <th [routerLink]="['/admin/territories/detail/' + territory.id]" scope="row" *ngIf="i < displayCount">{{ territory.number }}</th>
                         <td [routerLink]="['/admin/territories/detail/' + territory.id]" class="td-img" *ngIf="i < displayCount"><img class="w-25" src="{{ territory.map }}" alt="{{ 'Territorio ' + territory.number }}"></td>
                         <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.state ? territory.state : 'Not Assigned' }}</td>
                         <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.type }}</td>
                         <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.publisher !== '1' ? territory.publisher : 'Sin asignar' }}</td>
+                        <td 
+                        [ngClass]="{
+                        'text-danger' : toExpire( territory.last_date) > 3 && territory.state == 'Assigned',
+                        'text-success' : toExpire( territory.last_date) > 3 && territory.state == 'Not assigned'}"
+                        [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount"> {{ territory.state == 'Assigned' ? territory.date_assigned : endDate( territory.last_date ) }} </td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="my-3 text-center" *ngIf="territories.length > 9">
             <button class="btn btn-custom" (click)="viewMore()" >Ver más</button>
-        </div>
-        <div class="my-3 text-center">
-            <button class="btn btn-custom" [routerLink]="['/admin/territories/add']">Agregar Territorio</button>
         </div>
     </div>
 </div>
