@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { Subject, takeUntil } from 'rxjs';
+import { DatesService } from 'src/app/core/services/dates.service';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
 import { TerritoriesService } from 'src/app/modules/territories/services/territories.service';
 
@@ -15,7 +16,8 @@ export class ToExpireComponent implements OnInit, OnDestroy {
   public alert: string = '';
   destroyObs$: Subject<void> = new Subject();
 
-  constructor( private territoriesService: TerritoriesService ){}
+  constructor( private territoriesService: TerritoriesService,
+               private dates: DatesService ){}
 
   ngOnInit(): void {
     this.territoriesService.getTerritories()
@@ -35,18 +37,7 @@ export class ToExpireComponent implements OnInit, OnDestroy {
   }
 
   dateToExpire( last_date: number ){
-    const formatDate = last_date.toString();
-    const expDAte = moment(formatDate, 'YYYYMMDD').fromNow();
-    
-    if( expDAte.substring(0,1) === 'a' ){
-      return 1;
-    }
-
-    if( expDAte.includes('days') ){
-      return 0.5;
-    }
-
-    return Number(expDAte.substring(0,1));
+    return this.dates.dateToExpire( last_date );
   }
 
 }
