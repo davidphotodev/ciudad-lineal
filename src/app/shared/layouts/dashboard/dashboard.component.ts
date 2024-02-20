@@ -6,11 +6,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.sass'],
-  standalone: true,
-  imports: [
-    RouterModule,
-    CommonModule
-  ]
+
 })
 export class DashboardComponent {
 

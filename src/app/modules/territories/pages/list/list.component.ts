@@ -39,7 +39,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .subscribe(
         territories => {
           this.territories = territories;
-          this.list = territories;
+          this.list = territories.sort( (a,b) => a.number - b.number );
         })
   }
 
