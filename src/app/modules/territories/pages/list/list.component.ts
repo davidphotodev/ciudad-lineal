@@ -19,7 +19,8 @@ export class ListComponent implements OnInit {
       map: '',
       publisher: '',
       state: '',
-      last_date: ''
+      date_assigned: '',
+      last_date: 0
     }
   ]
 

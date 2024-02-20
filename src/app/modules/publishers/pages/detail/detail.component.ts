@@ -79,6 +79,7 @@ export class DetailComponent implements OnInit, OnDestroy {
     const publisher = this.publisher;
     const description = this.assignForm.value.description;
     const currentDate = moment().format('DD-MM-YYYY');
+    const last_date = moment().format('YYYYMMDD');
 
     if( this.assignForm.disabled || this.assignForm.invalid ){
       return;

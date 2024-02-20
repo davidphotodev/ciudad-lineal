@@ -49,11 +49,11 @@
                                 </figure>
                                 <hr>
                             </div>
-                            <button *ngIf="publisher?.territories?.length !== 0" class="btn btn-dark my-1" (click)="finishThisTerritory(territory)">Terminar</button>
+                            <button *ngIf="publisher?.territories?.length !== 0" class="btn btn-custom my-1" (click)="finishThisTerritory(territory)">Terminar</button>
                         </div>
                         <div *ngIf="showForm === false" class="py-3">
                             <p *ngIf="publisher?.territories?.length == 0">El publicador no tiene territorios asignados</p>
-                            <button (click)="displayForm()" *ngIf="publisher?.territories?.length == 0" class="btn btn-dark my-1">Asignar</button>
+                            <button (click)="displayForm()" *ngIf="publisher?.territories?.length == 0" class="btn btn-custom my-1">Asignar</button>
                         </div>
                         <div *ngIf="showForm" class="assign-form">
                             <h5>Asignar territorio</h5>
@@ -75,7 +75,7 @@
                                     <input type="text" name="description" formControlName="description" class="form-control">
                                 </div>
                                 <div *ngIf="!success" class="py-3">
-                                    <button (click)="assignTerritory()" type="submit" class="btn btn-dark">Asignar</button>
+                                    <button (click)="assignTerritory()" type="submit" class="btn btn-custom">Asignar</button>
                                     <button (click)="hideForm()" class="btn btn-danger mx-3">Cancelar</button>
                                 </div>
                                 <div class="error">
@@ -83,7 +83,7 @@
                                 </div>
                                 <div *ngIf="success" class="assigned">
                                     <div class="py-3">
-                                        <button [routerLink]="['/admin/territories/detail/' + territorySelected.id]" class="btn btn-dark">Ver territorio</button>
+                                        <button [routerLink]="['/admin/territories/detail/' + territorySelected.id]" class="btn btn-custom">Ver territorio</button>
                                     </div>
                                     <div class="alert alert-success" role="alert">
                                         El territorio ha sido asignado

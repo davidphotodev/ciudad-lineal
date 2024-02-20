@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, arrayUnion, collection, collectionData, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Territory } from '../models/territories.interface';
 import { Observable } from 'rxjs';
 import { Publisher } from '../../publishers/models/publisher.interface';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root'
@@ -38,6 +39,7 @@ export class TerritoriesService {
     const terrRef = doc( this.firestore, 'territories', territory_id );
     const publiRef = doc( this.firestore, 'publishers', publisher_id );
     const moveRef = collection(this.firestore, 'movements');
+    const last_date = moment().format('YYYYMMDD');
 
     // Script for territory
     try{
@@ -45,7 +47,8 @@ export class TerritoriesService {
        { state: 'Assigned',
          publisher: publisher.firstname + ' ' + publisher.lastname,
          publisher_id: publisher.id,
-         last_date: date_init
+         date_assigned: date_init,
+         last_date: Number(last_date)
        });
     }
     catch(error){
@@ -77,6 +80,7 @@ export class TerritoriesService {
         {
           date_init: date_init,
           date_end: '-',
+          last_date: Number(last_date),
           publisher: publisher.firstname + ' ' + publisher.lastname,
           subject: 'Asignado',
           territory: territory.number,
@@ -95,6 +99,7 @@ export class TerritoriesService {
     const publiRef = doc( this.firestore, 'publishers', publisher_id );
     const terrRef = doc( this.firestore, 'territories', territory_id );
     const moveRef = collection(this.firestore, 'movements');
+    const last_date = moment().format('YYYYMMDD');
 
     // Script Territory
     try{
@@ -104,11 +109,11 @@ export class TerritoriesService {
           state: 'Not assigned',
           publisher: '',
           history: arrayUnion({
-            date_init: territory.last_date,
+            date_init: territory.date_assigned,
             date_end: date_end,
             publisher: publisher.firstname + ' ' + publisher.lastname,
           }),
-          last_date: date_end,
+          last_date: Number(last_date),
           publisher_id: ''
         }
       );
@@ -121,10 +126,10 @@ export class TerritoriesService {
       const publiSnap = await updateDoc(
         publiRef,
         {
-          territories: [],
+          territories: arrayRemove( territory.number ),
           history: arrayUnion({
             territory: territory.number,
-            date_init: territory.last_date,
+            date_init: territory.date_assigned,
             date_end: date_end
           })
         }
@@ -139,8 +144,9 @@ export class TerritoriesService {
       addDoc(
         moveRef,
         {
-          date_init: territory.last_date,
+          date_init: territory.date_assigned,
           date_end: date_end,
+          last_date: Number(last_date),
           publisher: publisher.firstname + ' ' + publisher.lastname,
           subject: 'Terminado',
           territory: territory.number

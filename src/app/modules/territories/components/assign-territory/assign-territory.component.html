@@ -23,10 +23,10 @@
                     <input type="text" name="description" formControlName="description" class="form-control">
                 </div>
                 <div *ngIf="!success" class="py-2">
-                    <button type="submit" class="btn btn-dark">Asignar</button>
+                    <button type="submit" class="btn btn-custom">Asignar</button>
                 </div>
                 <div *ngIf="success" class="py-2">
-                    <button [routerLink]="['/admin/territories/detail/' + territory.id]" type="submit" class="btn btn-dark">Ver territorio</button>
+                    <button [routerLink]="['/admin/territories/detail/' + territory.id]" type="submit" class="btn btn-custom">Ver territorio</button>
                 </div>
                 <div *ngIf="success" class="alert alert-success" role="alert">
                     ¡Territorio asignado!

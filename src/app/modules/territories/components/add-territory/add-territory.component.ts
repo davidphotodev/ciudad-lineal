@@ -63,7 +63,8 @@ export class AddTerritoryComponent implements OnInit, OnDestroy {
       map : this.addForm.value.territoryMap,
       publisher : this.addForm.value.territoryAssigned,
       state : '',
-      last_date: ''
+      date_assigned: '',
+      last_date: 0
     };
 
     const response = await this.TerritoriesService.addTerritory( newTerritory );

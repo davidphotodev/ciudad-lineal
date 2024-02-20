@@ -5,16 +5,16 @@
         </div>
         <div class="row my-2 p-2">
             <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-dark">Todos</button>
+                <button class="btn btn-custom">Todos</button>
             </div>
             <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-dark">Asignados</button>
+                <button class="btn btn-custom">Asignados</button>
             </div>
             <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-dark">Disponibles</button>
+                <button class="btn btn-custom">Disponibles</button>
             </div>
             <div class="col-6 col-md-3 my-2 text-center">
-                <button class="btn btn-dark">Terminados</button>
+                <button class="btn btn-custom">Terminados</button>
             </div>
         </div>
         <div class="table-responsive">
@@ -40,10 +40,10 @@
             </table>
         </div>
         <div class="my-3 text-center" *ngIf="territories.length > 9">
-            <button class="btn btn-dark" (click)="viewMore()" >Ver más</button>
+            <button class="btn btn-custom" (click)="viewMore()" >Ver más</button>
         </div>
         <div class="my-3 text-center">
-            <button class="btn btn-dark" [routerLink]="['/admin/territories/add']">Agregar Territorio</button>
+            <button class="btn btn-custom" [routerLink]="['/admin/territories/add']">Agregar Territorio</button>
         </div>
     </div>
 </div>

@@ -8,7 +8,8 @@ export interface Territory{
     publisher: string,
     publisher_id?: string,
     state: string,
-    last_date: string
+    date_assigned: string,
+    last_date: number
 }
 
 export interface TerritoryHistory{

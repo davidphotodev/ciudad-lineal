@@ -7,6 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { DatesService } from 'src/app/core/services/dates.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-assign-territory',
@@ -119,7 +120,7 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
   // Assigning territory to publisher
   async assignTerritory( territory: Territory, publisher: Publisher){
     const description = this.assignForm.value.description;
-    const data_init = this.datesService.getCurrentDate();
+    const data_init = moment().format('DD-MM-YYYY');
   
     if( this.assignForm.disabled ){
       return;

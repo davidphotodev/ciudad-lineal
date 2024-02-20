@@ -27,8 +27,8 @@
                         <p><strong>Tipo: </strong>{{ territory.type | titlecase }}</p>
                         <p><strong>Publicador asignado: </strong>{{ territory.publisher ? territory.publisher : 'No está asignado' }}</p>
                         <p><strong>Detalles: </strong>{{ territory.description ? territory.description : 'No hay descripción' }}</p>
-                        <button *ngIf="territory.publisher !== ''" (click)="hideModal( 'd-block' )" class="btn btn-dark">Terminar territorio</button>
-                        <button *ngIf="territory.publisher === ''" [routerLink]="['/admin/territories/assign/' + territory.id]" class="btn btn-dark">Asignar territorio</button>
+                        <button *ngIf="territory.publisher !== ''" (click)="hideModal( 'd-block' )" class="btn btn-custom">Terminar territorio</button>
+                        <button *ngIf="territory.publisher === ''" [routerLink]="['/admin/territories/assign/' + territory.id]" class="btn btn-custom">Asignar territorio</button>
                         <hr>
                     </div>
 
