@@ -68,7 +68,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   endDate( date: number ){
-    const finish = Number(date);
+    const finish = date.toString();
     const end_date = moment( finish, 'YYYYMMDD' ).format('DD-MM-YYYY');
 
     return end_date;
