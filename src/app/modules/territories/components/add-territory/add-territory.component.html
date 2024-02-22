@@ -33,7 +33,7 @@
                         <option value="1">Sin asignar</option>
                         <option *ngFor="let publisher of publishers" [value]="publisher.id">{{ publisher.firstname + ' ' + publisher.lastname }}</option>
                     </select>
-                    <small class="text-danger" *ngIf="addForm.get('territoryAssigned')?.invalid">Selecciona el publicador</small>
+                    <small class="text-danger" *ngIf="addForm.get('territoryAssigned')?.invalid && addForm.get('territoryAssigned')?.touched">Selecciona el publicador</small>
                 </div>
                 <div class="py-2">
                     <label for="territoryMap">Mapa</label>
