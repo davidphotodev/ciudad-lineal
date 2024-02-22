@@ -8,13 +8,15 @@ import { FirestoreModule } from '@angular/fire/firestore';
 import { AssignTerritoryComponent } from './components/assign-territory/assign-territory.component';
 import { DetailModule } from './pages/detail/detail.module';
 import { RouterModule } from '@angular/router';
+import { EditTerritoryComponent } from './components/edit-territory/edit-territory.component';
 
 
 
 @NgModule({
   declarations: [
     AddTerritoryComponent,
-    AssignTerritoryComponent
+    AssignTerritoryComponent,
+    EditTerritoryComponent
   ],
   imports: [
     CommonModule,

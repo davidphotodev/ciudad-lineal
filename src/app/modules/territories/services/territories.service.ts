@@ -156,5 +156,25 @@ export class TerritoriesService {
       console.log(error);
     }
   }
+
+  async editTerritory( id: string | undefined, number: number, type: string, map: string, description: string ){
+    if( id === undefined || id === '' ) return;
+    const terrRef = doc( this.firestore, 'territories', id );
+
+    // Script Territory
+    try{
+      const terrSnap = await updateDoc(
+         terrRef,
+         { 
+           number: number,
+           type: type.trim(),
+           map: map.trim(),
+           description: description.trim()
+         }
+       );
+     }catch(error){
+       console.log(error);
+     }
+  }
   
 }
