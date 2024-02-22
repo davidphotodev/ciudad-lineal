@@ -6,7 +6,7 @@
                     <input (keyup)="getList()" type="text" formControlName="search" placeholder="Busca aquí el publicador o territorio" class="form-control w-100 w-md-75">
                 </form>
                 <div *ngIf="displayList === true" class="list bg-white position-absolute w-50 zindex-fixed">
-                    <div *ngIf="territories !== undefined" class="row">
+                    <div class="row">
                         <div class="col-12">
                             <p *ngIf="territories.length == 0 && publishers.length == 0" class="m-0 p-3">No se encontraron resultados</p>
                             <div *ngIf="territories !== undefined" class="territories">

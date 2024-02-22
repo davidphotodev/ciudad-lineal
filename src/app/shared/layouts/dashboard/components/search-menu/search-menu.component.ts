@@ -39,19 +39,19 @@ export class SearchMenuComponent {
     }
 
     if( !isNaN( numberValue ) ){
+      this.displayList = true;
       this.territoriesService.getTerritories()
         .subscribe(
           territories => this.territories = territories.filter( territory => territory.number.toString().includes(numberValue.toString()) )
         );
-        this.displayList = true;
     } 
 
     if( isNaN( numberValue ) ) {
+      this.displayList = true;
       this.publishersService.getPublishers()
         .subscribe(
           publishers => this.publishers = publishers.filter( publisher => this.normalizeString(publisher.firstname).toLowerCase().includes(this.normalizeString(value).toLowerCase()) )
         );
-        this.displayList = true;
     }
 
   }
