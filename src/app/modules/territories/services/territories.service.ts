@@ -45,7 +45,7 @@ export class TerritoriesService {
     try{
      const terrSnap = await updateDoc( terrRef,
        { state: 'Assigned',
-         publisher: publisher.firstname + ' ' + publisher.lastname,
+         publisher: publisher.firstname.trim() + ' ' + publisher.lastname.trim(),
          publisher_id: publisher.id,
          date_assigned: date_init,
          last_date: Number(last_date)
@@ -111,7 +111,7 @@ export class TerritoriesService {
           history: arrayUnion({
             date_init: territory.date_assigned,
             date_end: date_end,
-            publisher: publisher.firstname + ' ' + publisher.lastname,
+            publisher: publisher.firstname.trim() + ' ' + publisher.lastname.trim(),
           }),
           last_date: Number(last_date),
           publisher_id: ''

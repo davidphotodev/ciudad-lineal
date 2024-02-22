@@ -34,15 +34,15 @@ export class AddPublisherComponent {
     }
 
     const newPublisher: Publisher = {
-      firstname :  this.addForm.value.firstname,
-      lastname :  this.addForm.value.lastname,
-      email :  this.addForm.value.email,
-      publisherType : this.addForm.value.publisherType,
+      firstname :  this.addForm.value.firstname.trim(),
+      lastname :  this.addForm.value.lastname.trim(),
+      email :  this.addForm.value.email.trim(),
+      publisherType : this.addForm.value.publisherType.trim(),
       history: [],
-      description :  this.addForm.value.description,
-      phone : this.addForm.value.phone,
-      whatsapp : this.addForm.value.whatsapp,
-      address: this.addForm.value.address,
+      description :  this.addForm.value.description.trim(),
+      phone : this.addForm.value.phone.trim(),
+      whatsapp : this.addForm.value.whatsapp.trim(),
+      address: this.addForm.value.address.trim(),
       territories: []
     };
 
