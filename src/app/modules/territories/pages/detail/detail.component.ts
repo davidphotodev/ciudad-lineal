@@ -11,6 +11,7 @@ import { Territory } from '../../models/territories.interface';
 export class DetailComponent implements OnInit {
   
   public finishModalClass: string = 'd-none';
+  public deleteModalClass: string = 'd-none';
   public whatsappNumber: string = '604216037';
   public territory!: Territory;
   public lastDate!: string;
@@ -38,6 +39,10 @@ export class DetailComponent implements OnInit {
 
   hideModal( value: string ){
     this.finishModalClass = value;
+  }
+
+  hideDeleteModal( value: string ){
+    this.deleteModalClass = value;
   }
 
 }

@@ -22,7 +22,7 @@
                             <button [routerLink]="['/admin/territories/edit/' + territory.id]" class="btn btn-custom">Editar</button>
                         </div>
                         <div *ngIf="territory.state !== 'Assigned'" class="col-6 gap-2 d-md-flex justify-content-md-end">
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button (click)="hideDeleteModal('d-block')" class="btn btn-danger">Eliminar</button>
                         </div>
                     </div>
                 </div>
@@ -67,3 +67,9 @@
 <div *ngIf="territory! !== undefined" [class]="finishModalClass" class="finish-territory-modal">
     <app-finish-territory [territory]="territory" [idPublisher]="territory.publisher_id!" (childEvent)="hideModal($event)"></app-finish-territory>
 </div>
+
+<div *ngIf="territory! !== undefined" [class]="deleteModalClass" class="delete-territory-modal">
+    <app-delete-territory [idTerritory]="territory.id ? territory.id : ''" (childEvent)="hideDeleteModal($event)"></app-delete-territory>
+</div>
+
+

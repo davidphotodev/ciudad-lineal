@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, doc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, arrayRemove, arrayUnion, collection, collectionData, deleteDoc, doc, getDoc, updateDoc } from '@angular/fire/firestore';
 import { Territory } from '../models/territories.interface';
 import { Observable } from 'rxjs';
 import { Publisher } from '../../publishers/models/publisher.interface';
@@ -175,6 +175,10 @@ export class TerritoriesService {
      }catch(error){
        console.log(error);
      }
+  }
+
+  deleteTerritory( id: string ){
+    deleteDoc( doc( this.firestore, 'territories', id ) );
   }
   
 }
