@@ -21,7 +21,7 @@
                         <div class="col-6 text-left">
                             <button [routerLink]="['/admin/territories/edit/' + territory.id]" class="btn btn-custom">Editar</button>
                         </div>
-                        <div class="col-6 gap-2 d-md-flex justify-content-md-end">
+                        <div *ngIf="territory.state !== 'Assigned'" class="col-6 gap-2 d-md-flex justify-content-md-end">
                             <button class="btn btn-danger">Eliminar</button>
                         </div>
                     </div>
