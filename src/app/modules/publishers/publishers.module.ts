@@ -5,19 +5,23 @@ import { PublishersRoutingModule } from './publishers-routing.module';
 import { AddPublisherComponent } from './components/add-publisher/add-publisher.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DetailModule } from './pages/detail/detail.module';
+import { EditPublisherComponent } from './components/edit-publisher/edit-publisher.component';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
-    AddPublisherComponent
+    AddPublisherComponent,
+    EditPublisherComponent
   ],
   imports: [
     CommonModule,
     DetailModule,
     ListModule,
     PublishersRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ]
 })
 export class PublishersModule { }
