@@ -11,7 +11,7 @@
                             <img class="w-100" src="{{ territory.map }}" alt="Territorio {{ territory.number }}">
                         </figure>
                         <div>
-                           <button *ngIf="territory.publisher !== ''" class="btn btn-success">Enviar por Whatsapp</button>
+                          <button (click)="sendWhatsapp()" *ngIf="territory.publisher !== ''" class="btn btn-success">Enviar por Whatsapp</button>
                         </div>
                     </div>
                     <hr>
