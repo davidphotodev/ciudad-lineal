@@ -14,6 +14,16 @@
                             <p><strong>Detalle: </strong> {{ publisher.description ? publisher.description : '-' }} </p>
                         </div>
                     </div>
+                    <div class="modify">
+                        <div class="row">
+                            <div class="col-6 text-left">
+                                <button [routerLink]="['/admin/publishers/edit/' + publisher.id]" class="btn btn-custom">Editar</button>
+                            </div>
+                            <div *ngIf="publisher.territories.length < 1" class="col-6 gap-2 d-md-flex justify-content-md-end">
+                                <button (click)="hideDeleteModal('d-block')" class="btn btn-danger">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
                     <hr>
                 </div>
 
@@ -108,4 +118,8 @@
 
 <div [class]="finishModalClass" class="finish-territory-modal">
     <app-finish-territory [publisher]="publisher" [territory]="currentTerritory" (childEvent)="hideModal($event)"></app-finish-territory>
+</div>
+
+<div [class]="deleteModalClass" class="delete-publisher-modal">
+    <app-delete-publisher [idPublisher]="publisher.id ? publisher.id : ''" (childEvent)="hideDeleteModal($event)"></app-delete-publisher>
 </div>

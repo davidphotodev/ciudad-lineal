@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, doc, getDoc } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getDoc } from '@angular/fire/firestore';
 import { Publisher } from '../models/publisher.interface';
 import { Observable } from 'rxjs';
 
@@ -29,5 +29,9 @@ export class PublishersService {
     catch(error){
       console.error('Error en la promesa:', error);
     }
+  }
+
+  deletePublisher( id: string ){
+    deleteDoc( doc( this.firestore, 'publishers', id ) );
   }
 }

@@ -4,13 +4,15 @@ import { DetailComponent } from './detail.component';
 import { RouterModule } from '@angular/router';
 import { FinishTerritoryComponent } from './components/modals/finish-territory/finish-territory.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DeletePublisherComponent } from './components/modals/delete-publisher/delete-publisher.component';
 
 
 
 @NgModule({
   declarations: [
     DetailComponent,
-    FinishTerritoryComponent
+    FinishTerritoryComponent,
+    DeletePublisherComponent
   ],
   imports: [
     CommonModule,

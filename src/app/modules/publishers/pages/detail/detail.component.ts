@@ -18,6 +18,7 @@ import * as moment from 'moment';
 export class DetailComponent implements OnInit, OnDestroy {
   
   public finishModalClass: string = 'd-none';
+  public deleteModalClass: string = 'd-none';
   public imgSlug: string = image.slug;
   public showForm: boolean = false;
   public showList: boolean = false;
@@ -136,6 +137,11 @@ export class DetailComponent implements OnInit, OnDestroy {
 
     this.finishModalClass = 'd-block';
 
+  }
+
+  hideDeleteModal( value: string ){
+    this.deleteModalClass = value;
+    console.log( this.deleteModalClass );
   }
 
   hideModal( value: string ){
