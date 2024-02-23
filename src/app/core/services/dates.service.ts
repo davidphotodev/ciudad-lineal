@@ -39,6 +39,10 @@ export class DatesService {
       return 0.5;
     }
 
+    if( expDAte.includes('age') ){
+      return 12;
+    }
+
     return Number(expDAte.substring(0,1));
   }
 }
