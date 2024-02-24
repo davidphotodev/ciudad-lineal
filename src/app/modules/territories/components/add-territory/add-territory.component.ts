@@ -5,6 +5,7 @@ import { Territory } from '../../models/territories.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
 import { Subject, Subscription, takeUntil } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-add-territory',
@@ -13,16 +14,13 @@ import { Subject, Subscription, takeUntil } from 'rxjs';
   providers: [ 
   ]
 })
-export class AddTerritoryComponent implements OnInit, OnDestroy {
-
-  private addSuscription: Subscription = new Subscription();
+export class AddTerritoryComponent {
 
   public addForm: FormGroup = this.fb.group({
     territoryNumber: [0, [ Validators.required, Validators.min(1) ]],
     description: [''],
     territoryMap: ['', [ Validators.required, Validators.minLength(11) ]],
-    territoryType: ['', [ Validators.required ]],
-    territoryAssigned: ['', [ Validators.required ]]
+    territoryType: ['', [ Validators.required ]]
   });
 
   public added: boolean = false;
@@ -33,21 +31,6 @@ export class AddTerritoryComponent implements OnInit, OnDestroy {
   constructor( private fb: FormBuilder,
                private TerritoriesService: TerritoriesService,
                private publishersService: PublishersService ){}
-
-  ngOnInit(): void {
-    this.publishersService.getPublishers()
-      .pipe( takeUntil( this.destroyObs$ ) )
-      .subscribe(
-        publishers => {
-          this.publishers = publishers;
-        }
-      )
-  }
-
-  ngOnDestroy(): void {
-    this.destroyObs$.next();
-    this.destroyObs$.complete();
-  }
 
   async onSave(){
     if( this.addForm.invalid ){
@@ -61,10 +44,10 @@ export class AddTerritoryComponent implements OnInit, OnDestroy {
       history: [],
       type : this.addForm.value.territoryType.trim(),
       map : this.addForm.value.territoryMap.trim(),
-      publisher : this.addForm.value.territoryAssigned.trim(),
+      publisher : '',
       state : 'Not assigned',
       date_assigned: '',
-      last_date: 0
+      last_date: Number(moment().format('YYYYMMDD'))
     };
 
     const response = await this.TerritoriesService.addTerritory( newTerritory );
