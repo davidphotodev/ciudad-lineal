@@ -8,13 +8,14 @@
                 <div *ngIf="displayList === true" class="list bg-white position-absolute w-50 zindex-fixed">
                     <div class="row">
                         <div class="col-12">
-                            <p *ngIf="territories.length == 0 && publishers.length == 0" class="m-0 p-3">No se encontraron resultados</p>
-                            <div *ngIf="territories !== undefined" class="territories">
-                                <p (click)="selectItem()" [routerLink]="['/admin/territories/detail/' + territory.id]" *ngFor="let territory of territories" class="m-0 p-3">Territorio {{ territory.number }}</p>
-                            </div>
+                            <p *ngIf="(territories !== undefined && territories.length == 0) && (publishers !== undefined && publishers.length == 0)" class="m-0 p-3">No se encontraron resultados</p>
                             <div *ngIf="publishers !== undefined" class="publishers">
                                 <p (click)="selectItem()" [routerLink]="['/admin/publishers/detail/' + publisher.id]" *ngFor="let publisher of publishers" class="m-0 p-3">{{ publisher.firstname + ' ' + publisher.lastname }}</p>
                             </div>
+                            <div *ngIf="territories !== undefined" class="territories">
+                                <p (click)="selectItem()" [routerLink]="['/admin/territories/detail/' + territory.id]" *ngFor="let territory of territories" class="m-0 p-3">Territorio {{ territory.number }}</p>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>

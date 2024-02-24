@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
@@ -28,29 +28,38 @@ export class SearchMenuComponent {
 
   getList(){
     const value = this.searchForm.value.search;
-    const numberValue = Number(value);
+
+    console.log('Iniciando: ' + value);
 
     if( value == 0 || value == '' ){
       this.displayList = false;
       if( this.territories !== undefined ) this.territories.length = 0;
       if( this.publishers !== undefined ) this.publishers.length = 0;
+      console.log('Llegué a al primer if: ' + value);
 
       return;
     }
 
-    if( !isNaN( numberValue ) ){
-      this.displayList = true;
+    if( !isNaN( Number(value) ) ){
+      console.log('Llegué a territories: ' + value);
       this.territoriesService.getTerritories()
+        .pipe( takeUntil( this.destroyObs$ ) )  
         .subscribe(
-          territories => this.territories = territories.filter( territory => territory.number.toString().includes(numberValue.toString()) )
-        );
+            territories => {
+              this.territories = territories.filter( territory => territory.number.toString().includes(value.toString()) )
+              this.displayList = true;
+            }
+          );
     } 
 
-    if( isNaN( numberValue ) ) {
-      this.displayList = true;
+    if( isNaN( Number(value) ) ) {
       this.publishersService.getPublishers()
+        .pipe( takeUntil( this.destroyObs$ ) )  
         .subscribe(
-          publishers => this.publishers = publishers.filter( publisher => this.normalizeString(publisher.firstname).toLowerCase().includes(this.normalizeString(value).toLowerCase()) )
+            publishers => {
+              this.publishers = publishers.filter( publisher => this.normalizeString(publisher.firstname).toLowerCase().includes(this.normalizeString(value).toLowerCase()) );
+              this.displayList = true;
+            }
         );
     }
 
