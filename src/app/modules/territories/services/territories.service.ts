@@ -60,7 +60,7 @@ export class TerritoriesService {
       const publiSnap = await updateDoc(
         publiRef,
         {
-          territories: [ territory.number ],
+          territories: arrayUnion( territory.number ),
           history: arrayUnion({
             territory: territory.number,
             date_init: date_init,

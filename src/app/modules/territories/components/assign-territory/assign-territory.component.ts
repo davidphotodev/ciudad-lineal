@@ -44,6 +44,7 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
   async ngOnInit() {
   // Getting current territory data
    this.activatedRoute.params
+    .pipe( takeUntil( this.destroyObs$ ) )
     .subscribe(
       async ({ id }) => {
         const territoryData = await this.territoriesService.getTerritoryById( id );
@@ -97,9 +98,10 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
           // Showing publisher list, only if the publisher has not territory assigned
           const resultList = this.normalizeString(publisher.firstname).toLowerCase().includes( this.normalizeString(search).toLowerCase() );
           const hasTerritories = publisher.territories.length == 0;
+          const isAvailable = publisher.publisherType === 'regular' || publisher.publisherType === 'auxiliar';
           this.list = true;
 
-          return resultList && hasTerritories;
+          return resultList && hasTerritories || isAvailable;
         }
       );
 

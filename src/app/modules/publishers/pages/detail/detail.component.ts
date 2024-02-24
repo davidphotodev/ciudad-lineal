@@ -105,7 +105,9 @@ export class DetailComponent implements OnInit, OnDestroy {
   }
 
   selectTerritory( territory: Territory ){
-    this.assignForm.value.territory = territory.number;
+    this.assignForm.patchValue({
+      territory : territory.number
+    });
     this.territorySelected = territory;
     this.showList = false;
   }
@@ -119,7 +121,7 @@ export class DetailComponent implements OnInit, OnDestroy {
 
     if( territoryNumber > 0 ){
       this.territoriesToAssign = this.territories.filter(
-        territory => territory.number === territoryNumber && territory.state === 'Not assigned'
+        territory => territory.number.toString().includes( territoryNumber ) && territory.state === 'Not assigned'
       );
       this.showList = true;
     }

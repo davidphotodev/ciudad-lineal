@@ -101,6 +101,11 @@
                                 </div>
                             </form>
                         </div>
+                        <hr>
+                        <div *ngIf="showForm === false && publisher.territories.length > 0 && (publisher.publisherType === 'regular' || publisher.publisherType === 'auxiliar')" class="py-3">
+                            <h5>Asignar otro territorio</h5>
+                            <button (click)="displayForm()" class="btn btn-custom my-1">Asignar</button>
+                        </div>
                 </div>
             </div>
         </div>
