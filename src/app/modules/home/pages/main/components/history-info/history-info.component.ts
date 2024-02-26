@@ -12,6 +12,7 @@ export class HistoryInfoComponent implements OnInit, OnDestroy {
 
   public history!: History[];
   public destroyObs$: Subject<void> = new Subject;
+  loading: boolean = true;
 
   constructor( private historyServices: HistoryService ){}
 
@@ -35,6 +36,7 @@ export class HistoryInfoComponent implements OnInit, OnDestroy {
     )
     .subscribe(sortedHistory => {
       this.history = sortedHistory;
+      this.loading = false;
     });
   }
 

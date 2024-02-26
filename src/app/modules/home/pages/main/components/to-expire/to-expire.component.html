@@ -4,7 +4,7 @@
             <h4>Territorios por vencer</h4>
         </div>
     </div>
-    <div *ngFor="let territory of territories.slice(0,4)">
+    <div class="animate__animated animate__fadeIn" *ngFor="let territory of territories.slice(0,4)">
         <div [ngClass]="{
             'alert-danger' : dateToExpire( territory.last_date) > 3,
             'alert-warning' : dateToExpire( territory.last_date) == 3,
