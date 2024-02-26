@@ -12,6 +12,7 @@ export class LoginComponent {
 
 username: string = '';
 password: string = '';
+loading: boolean = false;
 loginError: boolean = false;
 
 public loginForm: FormGroup = this.fb.group({
@@ -27,7 +28,10 @@ constructor(
 
 onLogin( user:string, pass:string ){
 
+  this.loading = true;
+
   if( user != 'socrates' || pass != '17939317' ) {
+    this.loading = false;
     this.loginError = true;
     return;
   }
