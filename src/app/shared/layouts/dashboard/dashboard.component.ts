@@ -21,4 +21,8 @@ export class DashboardComponent {
     }
   }
 
+  closeMenu(){
+    this.sidebarWidth = 'sidebar-close';
+  }
+
 }

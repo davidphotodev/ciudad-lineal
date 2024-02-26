@@ -4,13 +4,13 @@
             <h2 class="text-center">Lista de Territorios</h2>
         </div>
         <div class="row my-2 p-2">
-            <div class="col-6 col-md-4 my-2 text-center">
+            <div class="col-4 col-md-4 my-2 text-center">
                 <button (click)="filterList('todos')" class="btn btn-custom">Todos</button>
             </div>
-            <div class="col-6 col-md-4 my-2 text-center">
+            <div class="col-4 col-md-4 my-2 text-center">
                 <button (click)="filterList('Assigned')" class="btn btn-custom">Asignados</button>
             </div>
-            <div class="col-6 col-md-4 my-2 text-center">
+            <div class="col-4 col-md-4 my-2 text-center">
                 <button (click)="filterList('Not assigned')" class="btn btn-custom">Disponibles</button>
             </div>
         </div>
@@ -19,7 +19,6 @@
                 <thead class="thead-dark">
                     <tr>
                         <th scope="col">Número</th>
-                        <th scope="col">Mapa</th>
                         <th scope="col">Estado</th>
                         <th scope="col">Tipo</th>
                         <th scope="col">Publicador</th>
@@ -29,7 +28,6 @@
                 <tbody>
                     <tr *ngFor="let territory of list; index as i">
                         <th [routerLink]="['/admin/territories/detail/' + territory.id]" scope="row" *ngIf="i < displayCount">{{ territory.number }}</th>
-                        <td [routerLink]="['/admin/territories/detail/' + territory.id]" class="td-img" *ngIf="i < displayCount"><img class="w-25" src="{{ territory.map }}" alt="{{ 'Territorio ' + territory.number }}"></td>
                         <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.state ? territory.state : 'Not Assigned' }}</td>
                         <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.type }}</td>
                         <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.publisher !== '1' ? territory.publisher : 'Sin asignar' }}</td>
