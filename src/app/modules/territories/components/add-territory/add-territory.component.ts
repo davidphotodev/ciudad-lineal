@@ -40,7 +40,7 @@ export class AddTerritoryComponent {
 
     const newTerritory: Territory = {
       number :  this.addForm.value.territoryNumber,
-      description :  this.addForm.value.description.trim(),
+      description : this.addForm.value.description !== '' ? this.addForm.value.description.trim() : '',
       history: [],
       type : this.addForm.value.territoryType.trim(),
       map : this.addForm.value.territoryMap.trim(),
@@ -54,6 +54,16 @@ export class AddTerritoryComponent {
     this.error = false;
     this.added = true;
     this.addForm.reset();
+  }
+
+  addedNew(){
+    this.added = false;
+    this.addForm.patchValue({
+      territoryNumber: 0,
+      description: '',
+      territoryMap: '',
+      territoryType: ''
+    })
   }
 
 }

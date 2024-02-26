@@ -43,8 +43,13 @@
                               placeholder="Comentario sobre el territorio"></textarea>
                 </div>
                 <div class="py-2 text-center">
-                    <button type="submit" 
+                    <button *ngIf="!added" type="submit" 
                             class="btn btn-custom">Agregar</button>
+                </div>
+                <div class="py-2 text-center">
+                    <button *ngIf="added" 
+                            class="btn btn-custom"
+                            (click)="addedNew()">Agregar otro territorio</button>
                 </div>
                 <div class="w-100 text-center">
                     <small *ngIf="added === true" class="text-success">¡Territorio agregado!</small>
