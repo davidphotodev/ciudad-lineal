@@ -28,9 +28,9 @@
                 <tbody>
                     <tr *ngFor="let territory of list; index as i">
                         <th [routerLink]="['/admin/territories/detail/' + territory.id]" scope="row" *ngIf="i < displayCount">{{ territory.number }}</th>
-                        <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.state ? territory.state : 'Not Assigned' }}</td>
-                        <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.type }}</td>
-                        <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.publisher !== '1' ? territory.publisher : 'Sin asignar' }}</td>
+                        <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.state == 'Assigned' ? 'Asignado' : 'Sin asignar' }}</td>
+                        <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.type === 'dificil' ? 'Difícil acceso' : territory.type | titlecase }}</td>
+                        <td [routerLink]="['/admin/territories/detail/' + territory.id]" *ngIf="i < displayCount">{{ territory.publisher !== '' ? territory.publisher : 'Sin asignar' }}</td>
                         <td 
                         [ngClass]="{
                         'text-danger' : toExpire( territory.last_date) > 3 && territory.state == 'Assigned',

@@ -20,7 +20,7 @@
                     <tr *ngFor="let publisher of publishers " >
                         <td [routerLink]="['/admin/publishers/detail/' + publisher.id]" scope="row"> {{ publisher.firstname }} </td>
                         <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.lastname }}</td>
-                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.publisherType }}</td>
+                        <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.publisherType === 'regular' ? 'Precursor regular' : publisher.publisherType | titlecase }}</td>
                         <td [routerLink]="['/admin/publishers/detail/' + publisher.id]">{{ publisher.territories }}</td>
                     </tr>
                 </tbody>
