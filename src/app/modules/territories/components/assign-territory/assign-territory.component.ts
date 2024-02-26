@@ -73,6 +73,8 @@ export class AssignTerritoryComponent implements OnInit, OnDestroy {
         );
   }
 
+
+
   // Destroying observable
   ngOnDestroy(): void {
     this.destroyObs$.next();

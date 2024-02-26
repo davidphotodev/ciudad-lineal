@@ -1,21 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TerritoriesService } from '../../services/territories.service';
 import { ActivatedRoute } from '@angular/router';
 import { Territory } from '../../models/territories.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
+import { Observable, Subject, filter, firstValueFrom, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.sass']
 })
-export class DetailComponent implements OnInit {
+export class DetailComponent implements OnInit, OnDestroy {
   
   public finishModalClass: string = 'd-none';
   public deleteModalClass: string = 'd-none';
-  public whatsappNumber: string = '604216037';
   public territory!: Territory;
   public lastDate!: string;
+  destroyObs$: Subject<void> = new Subject();
 
   constructor( private territoriesService: TerritoriesService,
                private activatedRoute: ActivatedRoute,
@@ -23,15 +24,18 @@ export class DetailComponent implements OnInit {
   
   
   async ngOnInit() {
-    this.activatedRoute.params
-      .subscribe(
-        async ({ id }) => {
-          const territoryData = await this.territoriesService.getTerritoryById( id );
-          if( territoryData ){
-            this.territory = { id, ...territoryData };
-          }
-        }
-      );
+    try{
+      const { id } = await firstValueFrom( this.activatedRoute.params.pipe( filter( res => !!res ) ) );
+      const territoryData = await this.territoriesService.getTerritoryById( id );
+      this.territory = { id, ...territoryData };
+    }catch{
+      console.log('Ha ocurrido un error');
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroyObs$.next();
+    this.destroyObs$.complete();
   }
 
   hideModal( value: string ){
