@@ -37,16 +37,7 @@ export class EditPublisherComponent implements OnInit, OnDestroy {
       async  ({ id }) => {
           const publisherData = await this.publishersService.getPublisherById( id );
           this.publisher = await { id, ...publisherData };
-          this.editForm.patchValue({
-            firstname: this.publisher.firstname,
-            lastname: this.publisher.lastname,
-            publisherType: this.publisher.publisherType,
-            email: this.publisher.email,
-            phone: this.publisher.phone,
-            whatsapp: this.publisher.whatsapp,
-            address: this.publisher.address,
-            description: this.publisher.description
-          })
+          this.fillForm();
         }
       );
   }
@@ -73,6 +64,19 @@ export class EditPublisherComponent implements OnInit, OnDestroy {
 
     this.publishersService.editPublisher( editedPublisher );
     this.success = true;
+  }
+
+  fillForm(){
+    this.editForm.patchValue({
+      firstname: this.publisher.firstname,
+      lastname: this.publisher.lastname,
+      publisherType: this.publisher.publisherType,
+      email: this.publisher.email,
+      phone: this.publisher.phone,
+      whatsapp: this.publisher.whatsapp,
+      address: this.publisher.address,
+      description: this.publisher.description
+    });
   }
 
 }
