@@ -12,7 +12,7 @@ import { DatesService } from 'src/app/core/services/dates.service';
 })
 export class ListComponent implements OnInit, OnDestroy {
 
-  public displayCount: number = 5;
+  public displayCount: number = 25;
   public territories: Territory[] = [
     {
       number: 1,
@@ -49,7 +49,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   viewMore(){
-    this.displayCount = this.displayCount + 9;
+    this.displayCount = this.displayCount + 25;
   }
 
   filterList( state: string ){

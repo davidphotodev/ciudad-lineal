@@ -40,7 +40,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="my-3 text-center" *ngIf="territories.length > 9">
+        <div class="my-3 text-center" *ngIf="territories.length > 25 && listState === 'todos'">
             <button class="btn btn-custom" (click)="viewMore()" >Ver más</button>
         </div>
     </div>
