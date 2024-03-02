@@ -29,19 +29,15 @@ export class SearchMenuComponent {
   getList(){
     const value = this.searchForm.value.search;
 
-    console.log('Iniciando: ' + value);
-
     if( value == 0 || value == '' ){
       this.displayList = false;
       if( this.territories !== undefined ) this.territories.length = 0;
       if( this.publishers !== undefined ) this.publishers.length = 0;
-      console.log('Llegué a al primer if: ' + value);
 
       return;
     }
 
     if( !isNaN( Number(value) ) ){
-      console.log('Llegué a territories: ' + value);
       this.territoriesService.getTerritories()
         .pipe( takeUntil( this.destroyObs$ ) )  
         .subscribe(

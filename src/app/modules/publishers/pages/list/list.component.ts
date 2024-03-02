@@ -22,7 +22,7 @@ export class ListComponent implements OnInit, OnDestroy {
       .pipe( takeUntil( this.destroyObs$ ) )
       .subscribe(
         publishers => {
-          this.publishers = publishers;
+          this.publishers = publishers.sort( (a,b) => a.firstname.localeCompare(b.firstname) );
           this.loading = false;
         }
       )
