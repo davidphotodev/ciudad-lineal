@@ -17,6 +17,14 @@
                             <small *ngIf="editForm.get('lastname')?.touched && editForm.get('lastname')?.invalid" class="text-danger">Debes introducir los apellidos</small>
                         </div>
                         <div class="input my-3">
+                            <label for="publisherType">Tipo de publicador</label>
+                            <select formControlName="publisherType" id="type" class="form-control">
+                                <option value="publicador">Publicador</option>
+                                <option value="regular">Regular</option>
+                                <option value="auxiliar">Auxiliar</option>
+                            </select>
+                        </div>
+                        <div class="input my-3">
                             <label for="email">Correo</label>
                             <input class="form-control" formControlName="email" type="text">
                             <small *ngIf="editForm.get('email')?.touched && editForm.get('email')?.invalid" class="text-danger">Debes introducir un correo</small>
