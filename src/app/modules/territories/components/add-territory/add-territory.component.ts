@@ -47,7 +47,7 @@ export class AddTerritoryComponent {
       publisher : '',
       state : 'Not assigned',
       date_assigned: '',
-      last_date: Number(moment().format('YYYYMMDD'))
+      last_date: Number(moment().subtract(120, 'days').format('YYYYMMDD'))
     };
 
     const response = await this.TerritoriesService.addTerritory( newTerritory );
