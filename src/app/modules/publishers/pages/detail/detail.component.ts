@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
 import { TerritoriesService } from 'src/app/modules/territories/services/territories.service';
 import { DatesService } from 'src/app/core/services/dates.service';
-import { Subject, filter, firstValueFrom, takeUntil } from 'rxjs';
+import { Subject, filter, firstValueFrom, forkJoin, from, mergeMap, of, takeUntil } from 'rxjs';
 import * as moment from 'moment';
 
 @Component({
@@ -57,7 +57,8 @@ export class DetailComponent implements OnInit, OnDestroy {
   
    ngOnInit() {
      this.getTerritories();
-     this.getCurrentPublisherData();
+     //this.getCurrentPublisherData();
+     this.getPublisherSub()
   }
 
   ngOnDestroy() {
@@ -65,10 +66,27 @@ export class DetailComponent implements OnInit, OnDestroy {
     this.destroyObs$.complete();
   }
 
+  getPublisherSub(){
+    this.activatedRoute.params.pipe( 
+      filter( res => !!res ),
+      mergeMap( ({ id }) => {
+        return forkJoin({
+          id: of( id ),
+          publisher: from( this.publishersService.getPublisherById( id ) ) 
+        })
+      }),
+      takeUntil( this.destroyObs$ )
+    ).subscribe( ({ id, publisher }) => {
+      this.publisher = { id, ...publisher }
+    })
+  }
+
   async getCurrentPublisherData(){
     try {
       const { id } = await firstValueFrom( this.activatedRoute.params.pipe( filter( res => !!res ) ) )
       const getPublisher = await this.publishersService.getPublisherById( id );
+
+      console.log(getPublisher)
       this.publisher = { id, ...getPublisher };
     } catch (error) {
       // Manage error
