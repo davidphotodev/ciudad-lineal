@@ -35,7 +35,6 @@ export class SearchMenuComponent implements OnInit {
     const user = localStorage.getItem( 'name' );
     if( user ){
       this.currentUser = user;
-      console.log( user );
     }
   }
 

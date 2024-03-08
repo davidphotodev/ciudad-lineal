@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ListComponent } from './pages/list/list.component';
 import { RouterModule } from '@angular/router';
 import { HistoryRoutingModule } from './history-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -12,6 +13,7 @@ import { HistoryRoutingModule } from './history-routing.module';
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     RouterModule,
     HistoryRoutingModule
   ]
