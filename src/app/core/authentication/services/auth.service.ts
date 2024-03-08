@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../interfaces/user.interface';
 import { Observable, catchError, map, of, tap } from 'rxjs';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { Auth, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, updateProfile } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -14,26 +14,38 @@ export class AuthService {
   constructor( private http: HttpClient,
                private auth: Auth ) { }
 
-  get currentUser():User|undefined{
-    if( !this.user ) return undefined;
-    return structuredClone( this.user );
+  getCurrentUser(){
+    const auth = getAuth();
+    const user = auth.currentUser;
+    return user;
   }
 
-  login( email: string, password: string ){
+  async login( email: string, password: string ){
     return signInWithEmailAndPassword( this.auth, email, password )
       .then( response => {
         console.log( response );
         localStorage.setItem( 'id', response.user.uid );
-        localStorage.setItem( 'user', response.user.email ? response.user.email : '' );
+        localStorage.setItem( 'email', response.user.email ? response.user.email : '' );
+        localStorage.setItem( 'name', response.user.displayName ? response.user.displayName : '' );
       });
   }
 
-  register( email: string, password: string ){
-    return createUserWithEmailAndPassword( this.auth, email, password );
+  async logout(){
+    return signOut( this.auth )
+      .then(
+        () => localStorage.clear()
+      )
   }
 
-  getUsersList(){
-    
+  async register( email: string, password: string, name: string ){
+    return createUserWithEmailAndPassword( this.auth, email, password )
+      .then(
+        response => {
+          updateProfile( response.user, {
+            displayName: name
+          });
+        }
+      );
   }
 
   checkAuthentication(): Observable<boolean> {

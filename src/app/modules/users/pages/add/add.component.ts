@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/core/authentication/services/auth.service';
 export class AddComponent {
 
   public addForm: FormGroup = this.fb.group({
+    name: ['', [ Validators.required ]],
     email: ['', [ Validators.required ]],
     password: ['', [ Validators.required ]]
   });
@@ -33,7 +34,7 @@ export class AddComponent {
     }
 
     this.error = '';
-    this.auth.register( this.addForm.value.email, this.addForm.value.password )
+    this.auth.register( this.addForm.value.email, this.addForm.value.password, this.addForm.value.name )
     .then( response => {
       this.error = '';
       this.success = true;
@@ -47,6 +48,7 @@ export class AddComponent {
     this.success = false;
     this.error = '';
     this.addForm.patchValue({
+      name: '',
       email: '',
       password: ''
     });

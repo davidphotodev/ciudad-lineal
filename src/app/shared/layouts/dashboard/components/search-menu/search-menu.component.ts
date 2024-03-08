@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/core/authentication/services/auth.service';
 import { Publisher } from 'src/app/modules/publishers/models/publisher.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
 import { Territory } from 'src/app/modules/territories/models/territories.interface';
@@ -11,11 +13,12 @@ import { TerritoriesService } from 'src/app/modules/territories/services/territo
   templateUrl: './search-menu.component.html',
   styleUrls: ['./search-menu.component.sass']
 })
-export class SearchMenuComponent {
+export class SearchMenuComponent implements OnInit {
 
   public territories!: Territory[];
   public publishers!: Publisher[];
   public displayList: boolean = false;
+  public currentUser: string = '';
   destroyObs$: Subject<void> = new Subject();
 
   public searchForm: FormGroup = this.fb.group({
@@ -24,7 +27,17 @@ export class SearchMenuComponent {
 
   constructor( private publishersService: PublishersService,
                private territoriesService: TerritoriesService,
-               private fb: FormBuilder ){}
+               private fb: FormBuilder,
+               private auth: AuthService,
+               private router: Router ){}
+
+  ngOnInit() {
+    const user = localStorage.getItem( 'name' );
+    if( user ){
+      this.currentUser = user;
+      console.log( user );
+    }
+  }
 
   getList(){
     const value = this.searchForm.value.search;
@@ -76,6 +89,11 @@ export class SearchMenuComponent {
 
   normalizeString(str: string): string {
     return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+
+  logOut(){
+    this.auth.logout()
+      .then( () => this.router.navigate(['auth']) );
   }
 
 }
