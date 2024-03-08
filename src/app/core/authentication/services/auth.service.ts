@@ -23,7 +23,6 @@ export class AuthService {
   async login( email: string, password: string ){
     return signInWithEmailAndPassword( this.auth, email, password )
       .then( response => {
-        console.log( response );
         localStorage.setItem( 'id', response.user.uid );
         localStorage.setItem( 'email', response.user.email ? response.user.email : '' );
         localStorage.setItem( 'name', response.user.displayName ? response.user.displayName : '' );

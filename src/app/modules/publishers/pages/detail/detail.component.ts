@@ -85,11 +85,9 @@ export class DetailComponent implements OnInit, OnDestroy {
     try {
       const { id } = await firstValueFrom( this.activatedRoute.params.pipe( filter( res => !!res ) ) )
       const getPublisher = await this.publishersService.getPublisherById( id );
-
-      console.log(getPublisher)
       this.publisher = { id, ...getPublisher };
     } catch (error) {
-      // Manage error
+      console.log(error)
     }
   }
 
