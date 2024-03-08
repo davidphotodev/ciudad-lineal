@@ -14,11 +14,12 @@ username: string = '';
 password: string = '';
 loading: boolean = false;
 loginError: boolean = false;
+msgError: string = '';
 
 public loginForm: FormGroup = this.fb.group({
-  username: ['', Validators.required], 
-  password: ['', Validators.required]
-});;
+  username: ['', [Validators.required]], 
+  password: ['', [Validators.required]]
+});
 
 constructor( 
   private fb: FormBuilder,
@@ -26,20 +27,28 @@ constructor(
   private router: Router
   ){}
 
-onLogin( user:string, pass:string ){
+onLogin(){
 
   this.loading = true;
 
-  if( user != 'socrates' || pass != '17939317' ) {
+  if( this.loginForm.invalid ) {
     this.loading = false;
+    this.msgError = 'Hay errores en los campos';
     this.loginError = true;
     return;
   }
 
-  this.AuthService.login( user, pass )
-    .subscribe( user => {
-      this.router.navigate(['admin'])
-    })
+  this.AuthService.login( this.loginForm.value.username, this.loginForm.value.password )
+  .then(
+    response => this.router.navigate(['admin'])
+  )
+  .catch( error => {
+    this.loading = false;
+    if( error.code === 'auth/invalid-email' ) this.msgError = 'No existe el usuario';
+    if( error.code === 'auth/invalid-credential' ) this.msgError = 'Contraseña incorrecta';
+    if( error.code !== 'auth/invalid-credential' && error.code !== 'auth/invalid-email' ) this.msgError = error.code;
+    this.loginError = true;
+  });
 
 }
 
