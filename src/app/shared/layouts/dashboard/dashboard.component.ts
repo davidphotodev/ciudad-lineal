@@ -11,11 +11,27 @@ import { RouterModule } from '@angular/router';
 export class DashboardComponent implements OnInit {
 
   public sidebarWidth: string = 'sidebar-close';
-  public dynamicWidth: number = 10;
+  public dynamicWidth: number = 0;
 
   ngOnInit(): void {
-    if (window.innerWidth > 991.98) {
-      this.dynamicWidth = 15; // Por ejemplo, en dispositivos móviles
+    if (window.innerWidth > 1400) {
+      this.dynamicWidth = 15; 
+    }
+
+    if (window.innerWidth > 992 && window.innerWidth < 1400 ) {
+      this.dynamicWidth = 15; 
+    }
+
+    if (window.innerWidth > 768 && window.innerWidth < 992 ) {
+      this.dynamicWidth = 25; 
+    }
+
+    if ( window.innerWidth > 576 && window.innerWidth < 768 ) {
+      this.dynamicWidth = 30; 
+    }
+
+    if (  window.innerWidth < 576 ) {
+      this.dynamicWidth = 10; 
     }
   }
 
