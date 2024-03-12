@@ -58,7 +58,7 @@ export class DetailComponent implements OnInit, OnDestroy {
    ngOnInit() {
      this.getTerritories();
      //this.getCurrentPublisherData();
-     this.getPublisherSub()
+     this.getPublisherSub();
   }
 
   ngOnDestroy() {

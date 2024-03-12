@@ -3,7 +3,7 @@ import { TerritoriesService } from '../../services/territories.service';
 import { ActivatedRoute } from '@angular/router';
 import { Territory } from '../../models/territories.interface';
 import { PublishersService } from 'src/app/modules/publishers/services/publishers.service';
-import { Observable, Subject, filter, firstValueFrom, takeUntil } from 'rxjs';
+import { Observable, Subject, filter, firstValueFrom, forkJoin, from, mergeMap, of, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-detail',
@@ -24,18 +24,27 @@ export class DetailComponent implements OnInit, OnDestroy {
   
   
   async ngOnInit() {
-    try{
-      const { id } = await firstValueFrom( this.activatedRoute.params.pipe( filter( res => !!res ) ) );
-      const territoryData = await this.territoriesService.getTerritoryById( id );
-      this.territory = { id, ...territoryData };
-    }catch{
-      console.log('Ha ocurrido un error');
-    }
+    this.getTerritorySub();
   }
 
   ngOnDestroy(): void {
     this.destroyObs$.next();
     this.destroyObs$.complete();
+  }
+
+  getTerritorySub(){
+    this.activatedRoute.params.pipe( 
+      filter( res => !!res ),
+      mergeMap( ({ id }) => {
+        return forkJoin({
+          id: of( id ),
+          territory: from( this.territoriesService.getTerritoryById( id ) ) 
+        })
+      }),
+      takeUntil( this.destroyObs$ )
+    ).subscribe( ({ id, territory }) => {
+      this.territory = { id, ...territory }
+    })
   }
 
   hideModal( value: string ){
