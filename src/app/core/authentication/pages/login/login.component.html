@@ -5,7 +5,7 @@
                 <h1 class="text-center my-3">¡Bienvenido a Ciudad Lineal!</h1>
                 <form [formGroup]="loginForm" class="form-control p-3">
                     <input class="form-control my-3" id="username" formControlName="username" type="text" placeholder="Usuario">
-                    <input class="form-control my-3" type="text" id="password" formControlName="password" placeholder="Contraseña">
+                    <input class="form-control my-3" type="password" id="password" formControlName="password" placeholder="Contraseña">
                     <button (click)="onLogin()" class="form-control btn btn-custom">Ingresar</button>
                     <div *ngIf="loading" class="spinner-border text-secondary my-3" role="status">
                         <span class="sr-only">Loading...</span>
