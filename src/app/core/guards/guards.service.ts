@@ -8,12 +8,12 @@ export function AuthGuard (route: Router, segments: UrlSegment[]) {
 
   const router = inject(Router);
 
-  return inject( AuthService ).checkAuthentication()
+  /* return inject( AuthService ).checkAuthentication()
     .pipe(
       tap( isAuthenticated => {
         if ( !isAuthenticated ){
           router.navigate(['./auth/login']);
         }
       })
-    )
+    ) */
 };

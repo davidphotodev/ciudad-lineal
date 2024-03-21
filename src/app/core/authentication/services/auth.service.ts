@@ -9,16 +9,10 @@ import { Auth, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPasswo
 })
 export class AuthService {
 
-  private user?: User;
+  private token?: string;
 
   constructor( private http: HttpClient,
                private auth: Auth ) { }
-
-  getCurrentUser(){
-    const auth = getAuth();
-    const user = auth.currentUser;
-    return user;
-  }
 
   async login( email: string, password: string ){
     return signInWithEmailAndPassword( this.auth, email, password )
@@ -26,6 +20,10 @@ export class AuthService {
         localStorage.setItem( 'id', response.user.uid );
         localStorage.setItem( 'email', response.user.email ? response.user.email : '' );
         localStorage.setItem( 'name', response.user.displayName ? response.user.displayName : '' );
+        localStorage.setItem( 'token', response.user.refreshToken ? response.user.refreshToken : '' );
+        this.token = response.user.uid;
+        
+        console.log(response);
       });
   }
 
@@ -47,11 +45,11 @@ export class AuthService {
       );
   }
 
-  checkAuthentication(): Observable<boolean> {
+  /* checkAuthentication(): Observable<boolean> {
     const id = localStorage.getItem('id');
 
-    if ( ! id ) return of(false);
+    if ( ! id  ) return of(false);
     return of( true );
-  }
+  } */
   
 }

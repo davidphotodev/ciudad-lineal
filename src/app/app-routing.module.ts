@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './shared/layouts/dashboard/dashboard.component';
 import { AuthGuard } from './core/guards/guards.service';
+import { canActivate, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
+    ...canActivate( () => redirectUnauthorizedTo(['/auth']) ),
     children: [
       {
         path: 'home',
@@ -32,8 +34,7 @@ const routes: Routes = [
         path: '**',
         redirectTo: 'home'
       }
-    ],
-    canMatch: [ AuthGuard ]
+    ]
   },
   {
     path: 'auth',
@@ -51,3 +52,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+
+
